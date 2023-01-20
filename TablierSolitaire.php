@@ -63,8 +63,8 @@ class TablierSolitaire {
 			$numColArrivee < 0 || $numColArrivee >= $this->nbColonnes ) return false;
 		
 		// Vérification que le déplacement est conforme
-		if( abs($numLigDepart - $numLigArrivee) == 2 && abs($numColDepart - $numColArrivee) == 0 ||
-			abs($numColDepart - $numColArrivee) == 2 && abs($numLigDepart - $numLigArrivee) == 0 ) return false;
+		if( !(abs($numLigDepart - $numLigArrivee) == 2 && $numColDepart == $numColArrivee) ||
+			 (abs($numColDepart - $numColArrivee) == 2 && $numLigDepart == $numLigArrivee) ) return false;
 		
 		// Vérification que la case de départ est bien occupée
 		if( !$this->tablier[$numLigDepart][$numColDepart]->isCaseBille() ) return false;
@@ -211,6 +211,10 @@ class TablierSolitaire {
 }
 
 $tablierEuro = TablierSolitaire::initTablierEuropeen();
+
+echo $tablierEuro->__toString();
+
+$tablierEuro->deplaceBilleDir(1, 3, TablierSolitaire::SUD);
 
 echo $tablierEuro->__toString();
 ?>
