@@ -4,7 +4,7 @@
 		public const VIDE       = 0;
 		public const NEUTRALISE = -1;
 		
-		protected $valeur; // Intervale -1, 0, 1 ?
+		protected $valeur; // -1, 0 ou 1
 
 		public function __construct($valeur = CaseSolitaire::BILLE) {
 			$this->valeur = $valeur;
@@ -34,8 +34,4 @@
 			return $this->valeur == CaseSolitaire::NEUTRALISE;
 		}
 	}
-
-	$case = new CaseSolitaire();
-
-	echo $case->__toString()
 ?>
