@@ -1,5 +1,5 @@
 <?php 
-include "TablierSolitaire.php" 
+include "TablierSolitaire.php";
 
 $tablier = TablierSolitaire::initTablierEuropeen();?>
 
