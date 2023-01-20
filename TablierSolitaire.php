@@ -158,6 +158,27 @@ class TablierSolitaire {
 		$this->deplaceBille($numLigDepart, $numColDepart, $numLigArrivee, $numColArrivee);
 	}
 
+	public function isFinDePartie(): bool {
+		for( $i = 0; $i < $this->nbLignes; $i++ ) {
+			for( $j = 0; $j < $this->nbColonnes; $j++ ) {
+				if( $this->isBilleJouable($i, $j) ) return false;
+			}
+		}
+
+		return true;
+	}
+
+	public function isVictoire(): bool {
+		$nbBilles = 0;
+
+		for( $i = 0; $i < $this->nbLignes; $i++ ) {
+			for( $j = 0; $j < $this->nbColonnes; $j++ ) {
+				if( $this->tablier[$i][$j]->isCaseBille() ) $nbBilles++;
+			}
+		}
+
+		return $nbBilles == 1;
+	}
 
 	public function __toString(): string{
 		$resul = "";
