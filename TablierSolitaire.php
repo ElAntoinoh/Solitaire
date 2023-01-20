@@ -208,6 +208,73 @@ class TablierSolitaire {
 
 		return $tablier;
 	}
+
+
+	public static function initTablierAnglais(): TablierSolitaire{
+		$tablier = new TablierSolitaire(7,7);
+
+		$tablier->neutraliseCase(0,1);
+		$tablier->neutraliseCase(1,0);
+		$tablier->neutraliseCase(0,0);
+		$tablier->neutraliseCase(1,1);
+
+		$tablier->neutraliseCase(0,6);
+		$tablier->neutraliseCase(0,5);
+		$tablier->neutraliseCase(1,6);
+		$tablier->neutraliseCase(1,5);
+
+		$tablier->neutraliseCase(6,0);
+		$tablier->neutraliseCase(5,0);
+		$tablier->neutraliseCase(6,1);
+		$tablier->neutraliseCase(5,1);
+
+		$tablier->neutraliseCase(6,6);
+		$tablier->neutraliseCase(6,5);
+		$tablier->neutraliseCase(5,6);
+		$tablier->neutraliseCase(5,5);
+
+		$tablier->videCase(3,3);
+
+		return $tablier;
+	}
+
+	public static function initTablierAsymetrique(): TablierSolitaire{
+		$tablier = new TablierSolitaire(8,8);
+
+		$tablier->neutraliseCase(0,0);
+		$tablier->neutraliseCase(0,1);
+		$tablier->neutraliseCase(1,0);
+		$tablier->neutraliseCase(1,1);
+		$tablier->neutraliseCase(2,0);
+		$tablier->neutraliseCase(2,1);
+
+		$tablier->neutraliseCase(0,7);
+		$tablier->neutraliseCase(0,6);
+		$tablier->neutraliseCase(0,5);
+		$tablier->neutraliseCase(1,7);
+		$tablier->neutraliseCase(1,6);
+		$tablier->neutraliseCase(1,5);
+		$tablier->neutraliseCase(2,7);
+		$tablier->neutraliseCase(2,6);
+		$tablier->neutraliseCase(2,5);
+
+		$tablier->neutraliseCase(7,0);
+		$tablier->neutraliseCase(6,0);
+		$tablier->neutraliseCase(7,1);
+		$tablier->neutraliseCase(6,1);
+
+		$tablier->neutraliseCase(7,7);
+		$tablier->neutraliseCase(7,6);
+		$tablier->neutraliseCase(7,5);
+		$tablier->neutraliseCase(6,7);
+		$tablier->neutraliseCase(6,6);
+		$tablier->neutraliseCase(6,5);
+		
+
+		$tablier->videCase(4, 3);
+
+		return $tablier;
+	}
 }
 
 $tablierEuro = TablierSolitaire::initTablierEuropeen();
