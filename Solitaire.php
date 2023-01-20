@@ -1,7 +1,7 @@
 <?php 
 include "TablierSolitaire.php";
 
-$tablier = TablierSolitaire::initTablierGagnant();?>
+$tablier = TablierSolitaire::initTablierEuropeen();?>
 
 <!DOCTYPE html>
 <html>
@@ -19,14 +19,18 @@ $tablier = TablierSolitaire::initTablierGagnant();?>
 					<tr>
 		    			<?php for($j=0; $j < $tablier->getNbColonnes(); $j++): ?>
 		    				<td>
+		    					<!-- Créer une figure en 96x96 -->
 			    				<figure class="image is-96x96">
-									<?php if($tablier->getCase($i, $j)->getValeur() == 1): ?>
+			    					<!-- Si la case est une bille -->
+									<?php if($tablier->getCase($i, $j)->getValeur() == CaseSolitaire::BILLE): ?>
 								  		<img src="ressources/CaseBille.png">
-							  		<?php elseif($tablier->getCase($i, $j)->getValeur() == 0): ?>
+							  		<!-- Si la case est vide -->
+							  		<?php elseif($tablier->getCase($i, $j)->getValeur() == CaseSolitaire::VIDE): ?>
 							  			<img src="ressources/CaseVide.png">
 							  		<?php endif; ?>
-								</figure>
-							</td>
+							  		<!-- Sinon ne mettre aucune image.-->
+									</figure>
+								</td>
 		    			<?php endFor; ?>
 	    			</tr>
 				<?php endFor; ?>

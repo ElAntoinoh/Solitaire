@@ -10,7 +10,7 @@ class TablierSolitaire {
 	private $nbLignes;
 	private $nbColonnes;
 
-	private $tablier;
+	protected $tablier;
 	
 	private function __construct(int $nblig = 5, int $nbcol = 5) {
 		$this->nbLignes = $nblig;

@@ -16,6 +16,7 @@ include "TablierSolitaire.php";
 
   	<!-- PARTIE PERDANT -->
 	  <section class="section is-align-center" >
+	  	<!-- Initialisation du tablier perdant -->
 	  	<?php $tablier = TablierSolitaire::initTablierPerdant();?>
 	    <table >
 	    	<tbody>
@@ -23,12 +24,16 @@ include "TablierSolitaire.php";
 					<tr>
 		    			<?php for($j=0; $j < $tablier->getNbColonnes(); $j++): ?>
 		    				<td>
+		    					<!-- Créer une figure en 96x96 -->
 			    				<figure class="image is-96x96">
-									<?php if($tablier->getCase($i, $j)->getValeur() == 1): ?>
+			    					<!-- Si la case est une bille -->
+									<?php if($tablier->getCase($i, $j)->getValeur() == CaseSolitaire::BILLE): ?>
 								  		<img src="ressources/CaseBille.png">
-							  		<?php elseif($tablier->getCase($i, $j)->getValeur() == 0): ?>
+							  		<!-- Si la case est vide -->
+							  		<?php elseif($tablier->getCase($i, $j)->getValeur() == CaseSolitaire::VIDE): ?>
 							  			<img src="ressources/CaseVide.png">
 							  		<?php endif; ?>
+							  		<!-- Sinon ne mettre aucune image.-->
 								</figure>
 							</td>
 		    			<?php endFor; ?>
@@ -37,10 +42,11 @@ include "TablierSolitaire.php";
 	    	</tbody>
 	    </table>
 
+	    <!-- Verification état de la partie -->
 	    <p>
-	    	Statue de la partie : 
+	    	<strong>Statue de la partie : </strong>
 	    	<?php
-	    		if($tablier->isFinPartie()){
+	    		if( $tablier->isFinDePartie() ){
 	    			if($tablier->isVictoire()){
 	    				echo "Victoire de la partie.";
 	    			}
@@ -58,19 +64,24 @@ include "TablierSolitaire.php";
 
 	  <!-- PARTIE GAGNANT -->
 	  <section class="section is-align-center" >
-	  	<?php $tablier = TablierSolitaire::initTablierGagnat();?>
+	  	<!-- Initialisation du tablier gagnant -->
+	  	<?php $tablier = TablierSolitaire::initTablierGagnant();?>
 	    <table >
 	    	<tbody>
 	    		<?php for($i=0; $i < $tablier->getNbLignes(); $i++): ?>
 					<tr>
 		    			<?php for($j=0; $j < $tablier->getNbColonnes(); $j++): ?>
 		    				<td>
+		    					<!-- Créer une figure en 96x96 -->
 			    				<figure class="image is-96x96">
-									<?php if($tablier->getCase($i, $j)->getValeur() == 1): ?>
+			    					<!-- Si la case est une bille -->
+									<?php if($tablier->getCase($i, $j)->getValeur() == CaseSolitaire::BILLE): ?>
 								  		<img src="ressources/CaseBille.png">
-							  		<?php elseif($tablier->getCase($i, $j)->getValeur() == 0): ?>
+							  		<!-- Si la case est vide -->
+							  		<?php elseif($tablier->getCase($i, $j)->getValeur() == CaseSolitaire::VIDE): ?>
 							  			<img src="ressources/CaseVide.png">
 							  		<?php endif; ?>
+							  		<!-- Sinon ne mettre aucune image.-->
 								</figure>
 							</td>
 		    			<?php endFor; ?>
@@ -79,10 +90,11 @@ include "TablierSolitaire.php";
 	    	</tbody>
 	    </table>
 
+		<!-- Verification état de la partie -->
 	    <p>
-	    	Statue de la partie : 
+	    	<strong>Statue de la partie : </strong>
 	    	<?php
-	    		if($tablier->isFinPartie()){
+	    		if($tablier->isFinDePartie()){
 	    			if($tablier->isVictoire()){
 	    				echo "Victoire de la partie.";
 	    			}
@@ -100,6 +112,7 @@ include "TablierSolitaire.php";
 
 	  <!-- PARTIE EN COURS -->
 	  <section class="section is-align-center" >
+	  	<!-- Initialisation du tablier en cours -->
 	  	<?php $tablier = TablierSolitaire::initTablierAnglais();?>
 	    <table >
 	    	<tbody>
@@ -107,12 +120,16 @@ include "TablierSolitaire.php";
 					<tr>
 		    			<?php for($j=0; $j < $tablier->getNbColonnes(); $j++): ?>
 		    				<td>
+		    					<!-- Créer une figure en 96x96 -->
 			    				<figure class="image is-96x96">
-									<?php if($tablier->getCase($i, $j)->getValeur() == 1): ?>
+			    					<!-- Si la case est une bille -->
+									<?php if($tablier->getCase($i, $j)->getValeur() == CaseSolitaire::BILLE): ?>
 								  		<img src="ressources/CaseBille.png">
-							  		<?php elseif($tablier->getCase($i, $j)->getValeur() == 0): ?>
+							  		<!-- Si la case est vide -->
+							  		<?php elseif($tablier->getCase($i, $j)->getValeur() == CaseSolitaire::VIDE): ?>
 							  			<img src="ressources/CaseVide.png">
 							  		<?php endif; ?>
+							  		<!-- Sinon ne mettre aucune image.-->
 								</figure>
 							</td>
 		    			<?php endFor; ?>
@@ -121,10 +138,11 @@ include "TablierSolitaire.php";
 	    	</tbody>
 	    </table>
 
+	    <!-- Verification état de la partie -->
 	    <p>
-	    	Statue de la partie : 
+	    	<strong>Statue de la partie : </strong>
 	    	<?php
-	    		if($tablier->isFinPartie()){
+	    		if($tablier->isFinDePartie()){
 	    			if($tablier->isVictoire()){
 	    				echo "Victoire de la partie.";
 	    			}
