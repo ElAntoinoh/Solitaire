@@ -1,7 +1,7 @@
 <?php 
 include "TablierSolitaire.php";
 
-$tablier = TablierSolitaire::initTablierEuropeen();?>
+$tablier = TablierSolitaire::initTablierGagnant();?>
 
 <!DOCTYPE html>
 <html>

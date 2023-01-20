@@ -299,5 +299,27 @@ class TablierSolitaire {
 
 		return $tablier;
 	}
+
+	public static function initTablierPerdant(): TablierSolitaire {
+		$tablier = new TablierSolitaire(3,3);
+
+		$tablier->videCase(0,0);
+		$tablier->videCase(0,1);
+		$tablier->videCase(0,2);
+		$tablier->videCase(1,0);
+		$tablier->videCase(1,1);
+		$tablier->videCase(1,2);
+
+		return $tablier;
+	}
+
+	public static function initTablierGagnant(): TablierSolitaire {
+		$tablier = TablierSolitaire::initTablierPerdant();
+
+		$tablier->videCase(2,0);
+		$tablier->videCase(2,1);
+
+		return $tablier;
+	}
 }
 ?>
