@@ -1,4 +1,7 @@
-<?php include "TablierSolitaire.php" ?>
+<?php 
+include "TablierSolitaire.php" 
+
+$tablier = TablierSolitaire::initTablierEuropeen();?>
 
 <!DOCTYPE html>
 <html>

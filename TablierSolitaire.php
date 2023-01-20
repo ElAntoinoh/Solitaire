@@ -295,7 +295,7 @@ class TablierSolitaire {
 	}
 }
 
-$tablier = TablierSolitaire::initTablierEuropeen();
+
 
 ?>
 
