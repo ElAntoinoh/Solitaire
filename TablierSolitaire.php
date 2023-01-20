@@ -1,11 +1,10 @@
 <?php
 require_once("CaseSolitaire.php");
 
-
 class TablierSolitaire {
-	const NORD = 0;
-	const EST = 1;
-	const SUD = 2;
+	const NORD  = 0;
+	const EST   = 1;
+	const SUD   = 2;
 	const OUEST = 3;
 
 	private $nbLignes;
@@ -163,9 +162,9 @@ class TablierSolitaire {
 	public function __toString(): string{
 		$resul = "";
 
-		for($i =0; $i < $this->nbLignes; $i++){
-			for($j=0; $j < $this->nbColonnes; $j++){
-				switch ($this->tablier[$i][$j]->getValeur()) {
+		for( $i = 0; $i < $this->nbLignes; $i++ ) {
+			for( $j = 0; $j < $this->nbColonnes; $j++ ) {
+				switch( $this->tablier[$i][$j]->getValeur() ) {
 					case 1:
 						$resul .= "●";
 						break;
@@ -177,8 +176,8 @@ class TablierSolitaire {
 						$resul .= "   ";
 						break;
 				}
-				
 			}
+			
 			$resul .=  "</br>";
 		}
 
@@ -208,7 +207,6 @@ class TablierSolitaire {
 
 		return $tablier;
 	}
-
 
 	public static function initTablierAnglais(): TablierSolitaire{
 		$tablier = new TablierSolitaire(7,7);
@@ -269,7 +267,6 @@ class TablierSolitaire {
 		$tablier->neutraliseCase(6,7);
 		$tablier->neutraliseCase(6,6);
 		$tablier->neutraliseCase(6,5);
-		
 
 		$tablier->videCase(4, 3);
 
@@ -279,7 +276,7 @@ class TablierSolitaire {
 
 $tablierEuro = TablierSolitaire::initTablierEuropeen();
 
-echo $tablierEuro->__toString();
+echo $tablierEuro->__toString() . "</br>";
 
 $tablierEuro->deplaceBilleDir(1, 3, TablierSolitaire::SUD);
 
