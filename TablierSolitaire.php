@@ -1,16 +1,16 @@
 <?php
 	class TablierSolitaire {
 		const NORD = 0;
-		const EST = 0;
-		const SUD = 0;
-		const OUEST = 0;
+		const EST = 1;
+		const SUD = 2;
+		const OUEST = 3;
 
 		private $nbLignes;
 		private $nbColonnes;
 
 		private $tablier;
 		
-		private function TablierSolitaire($nblig = 5, $nbcol = 5) {
+		private function TablierSolitaire(int $nblig = 5, int $nbcol = 5) {
 			$this->nbLignes = $nblig;
 			$this->nbColonnes = $nbcol;
 			$this->tablier = array();
@@ -24,31 +24,31 @@
 			}
 		}
 
-		public function getNbLignes() {
+		public function getNbLignes(): int {
 			return $this->nbLignes;
 		}
 
-		public function getNbColonnes() {
+		public function getNbColonnes(): int {
 			return $this->nbColonnes;
 		}
 
-		public function getTablier() {
+		public function getTablier(): array {
 			return $this->tablier;
 		}
 
-		public function getCase($ligne, $colonne) {
+		public function getCase(int $ligne, int $colonne): CaseSolitaire {
 			return $this->tablier[$ligne][$colonne];
 		}
 
-		public function videCase($ligne, $colonne) {
+		public function videCase(int $ligne, int $colonne): void {
 			$this->tablier[$ligne][$colonne]->setValeur(CaseSolitaire::VIDE);
 		}
 
-		public function remplitCase($ligne, $colonne) {
+		public function remplitCase(int $ligne, int $colonne): void {
 			$this->tablier[$ligne][$colonne]->setValeur(CaseSolitaire::BILLE);
 		}
 
-		public function neutraliseCase($ligne, $colonne) {
+		public function neutraliseCase(int $ligne, int $colonne): void {
 			$this->tablier[$ligne][$colonne]->setValeur(CaseSolitaire::NEUTRALISE);
 		}
 	}
