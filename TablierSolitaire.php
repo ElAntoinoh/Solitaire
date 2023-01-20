@@ -17,6 +17,7 @@ class TablierSolitaire {
 		$this->nbColonnes = $nbcol;
 		$this->tablier = array();
 
+		// Remplissage du tablier avec des billes
 		for( $i = 0; $i < $this->nbLignes; $i++ ) {
 			$this->tablier[$i] = array();
 
@@ -159,24 +160,29 @@ class TablierSolitaire {
 	}
 
 	public function isFinDePartie(): bool {
+		// Parcours des cases du tablier
 		for( $i = 0; $i < $this->nbLignes; $i++ ) {
 			for( $j = 0; $j < $this->nbColonnes; $j++ ) {
+				// Si la case est jouable, la partie n'est pas terminée
 				if( $this->isBilleJouable($i, $j) ) return false;
 			}
 		}
 
+		// Si on arrive ici, c'est que toutes les billes sont bloquées
 		return true;
 	}
 
 	public function isVictoire(): bool {
 		$nbBilles = 0;
 
+		// Parcours des cases du tablier
 		for( $i = 0; $i < $this->nbLignes; $i++ ) {
 			for( $j = 0; $j < $this->nbColonnes; $j++ ) {
 				if( $this->tablier[$i][$j]->isCaseBille() ) $nbBilles++;
 			}
 		}
 
+		// Si il ne reste qu'une bille, c'est une victoire
 		return $nbBilles == 1;
 	}
 
@@ -294,8 +300,4 @@ class TablierSolitaire {
 		return $tablier;
 	}
 }
-
-
-
 ?>
-
