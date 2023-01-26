@@ -112,8 +112,8 @@ include "TablierSolitaire.php";
 
 	  <!-- PARTIE EN COURS -->
 	  <section class="section is-align-center" >
-	  	<!-- Initialisation du tablier en cours -->
-	  	<?php $tablier = TablierSolitaire::initTablierAnglais();?>
+		<!-- Initialisation du tablier en cours -->
+		<?php $tablier = TablierSolitaire::initTablierAnglais();?>
 	    <table >
 	    	<tbody>
 	    		<?php for($i=0; $i < $tablier->getNbLignes(); $i++): ?>
@@ -156,6 +156,32 @@ include "TablierSolitaire.php";
 
 	    	?>
 	    </p>
+		  <p> Mouvement d'une bille </p>
+<?php $tablier->deplaceBilleDir(1,3, TablierSolitaire::SUD); ?>
+		  <table >
+	    	<tbody>
+	    		<?php for($i=0; $i < $tablier->getNbLignes(); $i++): ?>
+					<tr>
+		    			<?php for($j=0; $j < $tablier->getNbColonnes(); $j++): ?>
+		    				<td>
+		    					<!-- Créer une figure en 96x96 -->
+			    				<figure class="image is-96x96">
+			    					<!-- Si la case est une bille -->
+									<?php if($tablier->getCase($i, $j)->getValeur() == CaseSolitaire::BILLE): ?>
+								  		<img src="ressources/CaseBille.png">
+							  		<!-- Si la case est vide -->
+							  		<?php elseif($tablier->getCase($i, $j)->getValeur() == CaseSolitaire::VIDE): ?>
+							  			<img src="ressources/CaseVide.png">
+							  		<?php endif; ?>
+							  		<!-- Sinon ne mettre aucune image.-->
+								</figure>
+							</td>
+		    			<?php endFor; ?>
+	    			</tr>
+				<?php endFor; ?>
+	    	</tbody>
+	    </table>
+		  
 	  </section>
   </body>
 </html>
