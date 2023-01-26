@@ -1,6 +1,9 @@
 <?php
 require_once("CaseSolitaire.php");
 
+/**
+ * Classe TablierSolitaire
+ */
 class TablierSolitaire {
 	const NORD  = 0;
 	const EST   = 1;
@@ -12,6 +15,11 @@ class TablierSolitaire {
 
 	protected $tablier;
 	
+	/**
+	 * Constructeur de la classe TablierSolitaire
+	 * @param int $nblig Nombre de lignes du tablier
+	 * @param int $nbcol Nombre de colonnes du tablier
+	 */
 	private function __construct(int $nblig = 5, int $nbcol = 5) {
 		$this->nbLignes = $nblig;
 		$this->nbColonnes = $nbcol;
@@ -27,34 +35,75 @@ class TablierSolitaire {
 		}
 	}
 
+	/**
+	 * Retourne le nombre de lignes du tablier
+	 * @return int Nombre de lignes du tablier
+	 */
 	public function getNbLignes(): int {
 		return $this->nbLignes;
 	}
 
+	/**
+	 * Retourne le nombre de colonnes du tablier
+	 * @return int Nombre de colonnes du tablier
+	 */
 	public function getNbColonnes(): int {
 		return $this->nbColonnes;
 	}
 
+	/**
+	 * Retourne le tablier
+	 * @return array Tablier
+	 */
 	public function getTablier(): array {
 		return $this->tablier;
 	}
 
+	/**
+	 * Retourne la case du tablier
+	 * @param int $ligne Ligne de la case
+	 * @param int $colonne Colonne de la case
+	 * @return CaseSolitaire Case du tablier
+	 */
 	public function getCase(int $ligne, int $colonne): CaseSolitaire {
 		return $this->tablier[$ligne][$colonne];
 	}
 
+	/**
+	 * Vide la case du tablier
+	 * @param int $ligne Ligne de la case
+	 * @param int $colonne Colonne de la case
+	 */
 	public function videCase(int $ligne, int $colonne): void {
 		$this->tablier[$ligne][$colonne]->setValeur(CaseSolitaire::VIDE);
 	}
 
+	/**
+	 * Remplit la case du tablier
+	 * @param int $ligne Ligne de la case
+	 * @param int $colonne Colonne de la case
+	 */
 	public function remplitCase(int $ligne, int $colonne): void {
 		$this->tablier[$ligne][$colonne]->setValeur(CaseSolitaire::BILLE);
 	}
 
+	/**
+	 * Neutralise la case du tablier
+	 * @param int $ligne Ligne de la case
+	 * @param int $colonne Colonne de la case
+	 */
 	public function neutraliseCase(int $ligne, int $colonne): void {
 		$this->tablier[$ligne][$colonne]->setValeur(CaseSolitaire::NEUTRALISE);
 	}
 
+	/**
+	 * Retourne le nombre de billes restantes sur le tablier
+	 * @param int $numLigDepart Ligne de départ
+	 * @param int $numColDepart Colonne de départ
+	 * @param int $numLigArrivee Ligne d'arrivée
+	 * @param int $numColArrivee Colonne d'arrivée
+	 * @return bool Vrai si le mouvement est valide, faux sinon
+	 */
 	public function estValideMvt(int $numLigDepart, int $numColDepart, int $numLigArrivee, int $numColArrivee): bool {
 		// Vérification de la validité des coordonnées
 		if( $numLigDepart  < 0 || $numLigDepart  >= $this->nbLignes   ||
@@ -78,6 +127,13 @@ class TablierSolitaire {
 		return true;
 	}
 
+	/**
+	 * Retourne le nombre de billes restantes sur le tablier
+	 * @param int $numLigDepart Ligne de départ
+	 * @param int $numColDepart Colonne de départ
+	 * @param int $dir Direction du déplacement
+	 * @return bool Vrai si le mouvement est valide, faux sinon
+	 */
 	public function estValideMvtDir(int $numLigDepart, int $numColDepart, int $dir): bool {
 		$numLigArrivee = -1;
 		$numColArrivee = -1;
@@ -105,6 +161,12 @@ class TablierSolitaire {
 		return $this->estValideMvt($numLigDepart, $numColDepart, $numLigArrivee, $numColArrivee);
 	}
 
+	/**
+	 * Retourne le nombre de billes restantes sur le tablier
+	 * @param int $numLig Ligne de la case
+	 * @param int $numCol Colonne de la case
+	 * @return bool Vrai si au moins une case est jouable, faux sinon
+	 */
 	public function isBilleJouable(int $numLig, int $numCol): bool {
 		// Vérification de la validité des coordonnées
 		if( $numLig < 0 || $numLig >= $this->nbLignes   ||
@@ -122,6 +184,13 @@ class TablierSolitaire {
 		return false;
 	}
 
+	/**
+	 * Retourne le nombre de billes restantes sur le tablier
+	 * @param int $numLigDepart Ligne de départ
+	 * @param int $numColDepart Colonne de départ
+	 * @param int $numLigArrivee Ligne d'arrivée
+	 * @param int $numColArrivee Colonne d'arrivée
+	 */
 	public function deplaceBille(int $numLigDepart, int $numColDepart, int $numLigArrivee, int $numColArrivee): void {
 		// Vérification de la validité du déplacement
 		if( !$this->estValideMvt($numLigDepart, $numColDepart, $numLigArrivee, $numColArrivee) ) return;
@@ -132,6 +201,12 @@ class TablierSolitaire {
 		$this->videCase(($numLigDepart + $numLigArrivee) / 2, ($numColDepart + $numColArrivee) / 2);
 	}
 
+	/**
+	 * Retourne le nombre de billes restantes sur le tablier
+	 * @param int $numLigDepart Ligne de départ
+	 * @param int $numColDepart Colonne de départ
+	 * @param int $dir Direction du déplacement
+	 */
 	public function deplaceBilleDir(int $numLigDepart, int $numColDepart, int $dir): void {
 		$numLigArrivee = -1;
 		$numColArrivee = -1;
@@ -159,6 +234,10 @@ class TablierSolitaire {
 		$this->deplaceBille($numLigDepart, $numColDepart, $numLigArrivee, $numColArrivee);
 	}
 
+	/**
+	 * Retourne Vrai si le plateau n'est plus modifiable
+	 * @return bool Vrai si la partie est terminée
+	 */
 	public function isFinDePartie(): bool {
 		// Parcours des cases du tablier
 		for( $i = 0; $i < $this->nbLignes; $i++ ) {
@@ -172,6 +251,10 @@ class TablierSolitaire {
 		return true;
 	}
 
+	/**
+	 * Retourne Vrai si la partie est gagnante
+	 * @return bool Vrai si la partie est gagnée
+	 */
 	public function isVictoire(): bool {
 		$nbBilles = 0;
 
@@ -186,6 +269,10 @@ class TablierSolitaire {
 		return $nbBilles == 1;
 	}
 
+	/**
+	 * toString de la classe TablierSolitaire
+	 * @return string Chaine de caractères représentant le tablier
+	 */
 	public function __toString(): string{
 		$resul = "";
 
@@ -211,6 +298,10 @@ class TablierSolitaire {
 		return $resul;
 	}
 
+	/**
+	 * Initialise un tablier européen
+	 * @return TablierSolitaire Tablier initialisé
+	 */
 	public static function initTablierEuropeen(): TablierSolitaire{
 		$tablier = new TablierSolitaire(7,7);
 
@@ -235,6 +326,10 @@ class TablierSolitaire {
 		return $tablier;
 	}
 
+	/**
+	 * Initialise un tablier anglais
+	 * @return TablierSolitaire Tablier initialisé
+	 */
 	public static function initTablierAnglais(): TablierSolitaire{
 		$tablier = new TablierSolitaire(7,7);
 
@@ -263,6 +358,10 @@ class TablierSolitaire {
 		return $tablier;
 	}
 
+	/**
+	 * Initialise un tablier asymétrique
+	 * @return TablierSolitaire Tablier initialisé
+	 */
 	public static function initTablierAsymetrique(): TablierSolitaire{
 		$tablier = new TablierSolitaire(8,8);
 
@@ -300,6 +399,10 @@ class TablierSolitaire {
 		return $tablier;
 	}
 
+	/**
+	 * Initialise un tablier perdant
+	 * @return TablierSolitaire Tablier initialisé
+	 */
 	public static function initTablierPerdant(): TablierSolitaire {
 		$tablier = new TablierSolitaire(3,3);
 
@@ -313,6 +416,10 @@ class TablierSolitaire {
 		return $tablier;
 	}
 
+	/**
+	 * Initialise un tablier gagnant
+	 * @return TablierSolitaire Tablier initialisé
+	 */
 	public static function initTablierGagnant(): TablierSolitaire {
 		$tablier = TablierSolitaire::initTablierPerdant();
 
