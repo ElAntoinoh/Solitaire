@@ -97,7 +97,7 @@ class TablierSolitaire {
 	}
 
 	/**
-	 * Retourne le nombre de billes restantes sur le tablier
+	 * Retourne si le mouvement est valide
 	 * @param int $numLigDepart Ligne de départ
 	 * @param int $numColDepart Colonne de départ
 	 * @param int $numLigArrivee Ligne d'arrivée
@@ -128,7 +128,7 @@ class TablierSolitaire {
 	}
 
 	/**
-	 * Retourne le nombre de billes restantes sur le tablier
+	 * Retourne si le mouvement est valide
 	 * @param int $numLigDepart Ligne de départ
 	 * @param int $numColDepart Colonne de départ
 	 * @param int $dir Direction du déplacement
@@ -162,7 +162,7 @@ class TablierSolitaire {
 	}
 
 	/**
-	 * Retourne le nombre de billes restantes sur le tablier
+	 * Retourne si au moins une case est jouable pour la bille
 	 * @param int $numLig Ligne de la case
 	 * @param int $numCol Colonne de la case
 	 * @return bool Vrai si au moins une case est jouable, faux sinon
@@ -185,7 +185,7 @@ class TablierSolitaire {
 	}
 
 	/**
-	 * Retourne le nombre de billes restantes sur le tablier
+	 * Deplace la bille
 	 * @param int $numLigDepart Ligne de départ
 	 * @param int $numColDepart Colonne de départ
 	 * @param int $numLigArrivee Ligne d'arrivée
@@ -202,7 +202,7 @@ class TablierSolitaire {
 	}
 
 	/**
-	 * Retourne le nombre de billes restantes sur le tablier
+	 * Deplace la bille vers une direction
 	 * @param int $numLigDepart Ligne de départ
 	 * @param int $numColDepart Colonne de départ
 	 * @param int $dir Direction du déplacement
