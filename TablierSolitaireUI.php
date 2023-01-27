@@ -21,18 +21,17 @@
                 $str .= "<tr>";
 
                 for( $j = 0; $j < $this->ts->getNbColonnes(); $j++ ) {
-                    $str .= "<td><button class='";
+                    $str .= "<td>";
+
                     switch($this->ts->getCase($i, $j)->getValeur()) {
-                        case -1: { $str .= "neutralise"; break; } 
-                        case  0: { $str .= "vide";       break; }
-                        case  1: { $str .= "bille";      break; }
+                        case -1: { $classe = "neutralise"; break; }
+                        case  0: { $classe = "vide";       break; }
+                        case  1: { $classe = "bille";      break; }
                     }
-                    
-                    $str .= "' name='coord' value='" . $i . "_" . $j . "' ";
 
-                    if( !$this->ts->isBilleJouable($i, $j) ) $str .= "disabled";
+                    $str .= TablierSolitaireUI::getBoutonCaseSolitaire($classe, $i, $j, $this->ts->isBilleJouable($i, $j));
 
-                    $str .= "><figure class=\"image is-96x96\">";
+                    $str .= "<figure class=\"image is-96x96\">";
                     switch($this->ts->getCase($i, $j)->getValeur()) {
                         case  0: { $str .= "<img src=\"ressources/CaseVide.png\">";  break; }
                         case  1: { $str .= "<img src=\"ressources/CaseBille.png\">"; break; }
@@ -65,18 +64,17 @@
                 $str .= "<tr>";
 
                 for( $j = 0; $j < $this->ts->getNbColonnes(); $j++ ) {
-                    $str .= "<td><button class='";
+                    $str .= "<td>";
+
                     switch($this->ts->getCase($i, $j)->getValeur()) {
-                        case -1: { $str .= "neutralise"; break; }
-                        case  0: { $str .= "vide";       break; }
-                        case  1: { $str .= "bille";      break; }
+                        case -1: { $classe = "neutralise"; break; }
+                        case  0: { $classe = "vide";       break; }
+                        case  1: { $classe = "bille";      break; }
                     }
 
-                    $str .= "'name='coord' value='" . $i . "_" . $j . "'"; 
+                    $str .= TablierSolitaireUI::getBoutonCaseSolitaire($classe, $i, $j, $this->ts->estValideMvt($lig,$col, $i, $j));
 
-                    if(!$this->ts->estValideMvt($lig,$col, $i, $j)) $str.= "disabled";
-
-                    $str .= "><figure class=\"image is-96x96\"><img src=\"ressources/";
+                    $str .= "<figure class=\"image is-96x96\"><img src=\"ressources/";
                     switch($this->ts->getCase($i, $j)->getValeur()) {
                         case  0: { $str .= "CaseVide.png";  break; }
                         case  1: { $str .= "CaseBille.png"; break; }
