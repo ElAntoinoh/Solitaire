@@ -1,11 +1,9 @@
 <?php 
+
 	include "TablierSolitaireUI.php";
 	include "TablierSolitaire.php";
-
 	session_start();
-
-	$_SESSION['Tablier'] = new TablierSolitaireUI(TablierSolitaire::initTablierEuropeen());
-?>
+	?>
 
 <!DOCTYPE html>
 <html>
@@ -18,7 +16,33 @@
 
 	<body background="ressources/fondBois.jpg">
 		<section class="section is-align-center" >
-			<?= $_SESSION['Tablier']->getFormulaireOrigine(); ?>
+			<?php
+			if( !isset($_SESSION['Tablier']) ) {
+					$_SESSION['Tablier'] = TablierSolitaire::initTablierEuropeen();
+
+					$UI = new TablierSolitaireUI($_SESSION['Tablier']);
+
+					echo $UI->getFormulaireOrigine();
+			}else{
+				if( isset($_GET) && isset($_GET['action']) ){
+					switch($_GET['action']){
+						case "selectionner" :
+							$UI = new TablierSolitaireUI($_SESSION['Tablier']);
+
+							echo $UI->getFormulaireOrigine();
+							break;
+						case "poser":				
+							$UI = new TablierSolitaireUI($_SESSION['Tablier']);
+
+							echo $UI->getFormulaireDestination($_GET['coord']);
+
+							break;
+					}
+				}
+			}
+
+
+			?>
   	</section>
 	</body>
 </html>

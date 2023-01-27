@@ -6,7 +6,7 @@
          * Constructeur de la classe TablierSolitaireUI
          */
         public function __construct(TablierSolitaire $ts = null) {
-            $this->ts = $ts != null ? $ts : new TablierSolitaire();
+            $this->ts = $ts != null ? $ts : TablierSolitaire::initTablierEuropeen();
         }
 
         /**
@@ -42,6 +42,7 @@
 
                 $str .= "</tr>";
             }
+            $str .= "<input type='hidden' name='action' value='selectionner'/>";
 
             return $str .= "</tbody></table></form>";
         }
@@ -74,10 +75,10 @@
 
                     $str .= TablierSolitaireUI::getBoutonCaseSolitaire($classe, $i, $j, $this->ts->estValideMvt($lig,$col, $i, $j));
 
-                    $str .= "<figure class=\"image is-96x96\"><img src=\"ressources/";
+                    $str .= "<figure class=\"image is-96x96\">";
                     switch($this->ts->getCase($i, $j)->getValeur()) {
-                        case  0: { $str .= "CaseVide.png";  break; }
-                        case  1: { $str .= "CaseBille.png"; break; }
+                        case  0: { $str .= "<img src=\"ressources/CaseVide.png\">";  break; }
+                        case  1: { $str .= "<img src=\"ressources/CaseBille.png\">"; break; }
                     }
 
                     $str .= "</figure></button></td>";
@@ -85,6 +86,9 @@
 
                 $str.="</tr>";
             }
+
+            $str .= "<input type='hidden' name='coord_depart' value='".$coord_depart."'/>";
+            $str .= "<input type='hidden' name='action' value='poser'/>";
 
             return $str .="</tbody></table></form>";
         }
@@ -118,7 +122,7 @@
         }
 
         private function getBoutonCaseSolitaire(String $classe, int $ligne, int $colonne, bool $disabled) : String {
-            return "<button class=\"" . $classe . "\" name=\"coord\" value=\"" . $ligne . "_" . $colonne . "\" " . ($disabled ? "disabled" : "") . ">";
+            return "<button class=\"" . $classe . "\" name=\"coord\" value=\"" . $ligne . "_" . $colonne . "\" " . ($disabled ? "" : "disabled") . ">";
         }
     }
 ?>
