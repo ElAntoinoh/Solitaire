@@ -53,7 +53,48 @@
          * @param String $coord_depart Coordonnées de la case de départ
          * @return String Chaine de caractères intégrant le code HTML.
          */
-        public function getFormulaireDestination(String $coord_depart): String {}
+        public function getFormulaireDestination(String $coord_depart): String {
+            $lig = intval(explode("_", $coord_depart)[0]);
+            $col = intval(explode("_", $coord_depart)[1]);
+
+            $str = "<form action=\"action.php\" method=\"GET\">
+            <table >
+                <tbody>";
+
+            for($i=0; $i < $tablier->getNbLignes(); $i++){
+                $str += "<tr>";
+                for($j=0; $j < $tablier->getNbColonnes(); $j++) {
+                    $str += "<td>
+                                    <button class='";
+                    switch($tablier->getCase($i, $j)->getValeur()){
+                        case 0: {return "vide'";break;}
+                        case 1: {return "bille'";break;} 
+                        default: {return "neutralise'";break;} 
+                    }
+                    $str += "name='coord' value='".$i."_".$j."'"; 
+
+                    if(!$tablier->estValideMvt($lig,$col, $i, $j)) $str+= "disabled";
+
+                    $str += "><figure class=\"image is-96x96\"><img src=\"ressources/";
+                    if($tablier->getCase($i, $j)->getValeur() == CaseSolitaire::BILLE){
+                        $str+= "CaseBille.png";
+                    }elseif($tablier->getCase($i, $j)->getValeur() == CaseSolitaire::VIDE) {
+                        $str+= "CaseVide.png";
+                    }
+                    $str = "</figure>
+                                        </button>
+                                    </td>";
+                }
+                $str+="</tr>";
+            }
+            $str +="</tbody>
+            </table>
+        </form>";
+                
+
+
+            return $str;
+        }
 
         /**
          * Retourne une chaîne de caractères intégrant le code HTML représentant le plateau du jeu
@@ -62,29 +103,8 @@
          */
         public function getTablierFinal(): String {}
 
-        /**
-         * Décode les chaînes associées aux coordonnées des cases de départ et de destination du
-         * mouvement et l'effectue sur la tablier. À l'issue du déplacement, elle vérifie si la
-         * partie est terminée et affiche si nécessaire un message de victoire ou de defaite.
-         * @param String $coord_depart Coordonnées de la case de départ
-         * @param String $coord_arrivee Coordonnées de la case de destination
-         */
-        public function realiserMouvement(String $coord_depart, String $coord_arrivee): void {
-            // Déplacement de la bille
-            $this->ts->deplaceBille(
-                intval(explode("_", $coord_depart)[0]),
-                intval(explode("_", $coord_depart)[1]),
-                intval(explode("_", $coord_arrivee)[0]),
-                intval(explode("_", $coord_arrivee)[1])
-            );
+        
 
-            // Vérification de la fin de partie
-            if( !$this->ts->isFinDePartie() ) return;
-
-            // Veirification victoire/défaite
-            echo $this->ts->isVictoire() ? "<p>Victoire !</p>" : "<p>Défaite !</p>";
-        }
-
-        private function getBoutonCaseSolitaire(int $ligne, int $colonne, bool $disabled, String $classe): String {}
+        private function getBoutonCaseSolitaire(String $classe, int $ligne, int $colonne, bool $disabled) : String {}
     }
 ?>
