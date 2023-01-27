@@ -28,9 +28,11 @@
                         case  1: { $str .= "bille";      break; }
                     }
                     
-                    $str .= "' name='coord' value='" . $i . "_" . $j . "' " . ($this->ts->isBilleJouable($i, $j) ? "" : "disabled") . ">";
+                    $str .= "' name='coord' value='" . $i . "_" . $j . "' ";
 
-                    $str .= "<figure class=\"image is-96x96\">";
+                    if( !$this->ts->isBilleJouable($i, $j) ) $str .= "disabled";
+
+                    $str .= "><figure class=\"image is-96x96\">";
                     switch($this->ts->getCase($i, $j)->getValeur()) {
                         case  0: { $str .= "<img src=\"ressources/CaseVide.png\">";  break; }
                         case  1: { $str .= "<img src=\"ressources/CaseBille.png\">"; break; }
@@ -42,7 +44,7 @@
                 $str .= "</tr>";
             }
 
-            return $str;
+            return $str .= "</tbody></table></form>";
         }
 
         /**
@@ -57,43 +59,36 @@
             $lig = intval(explode("_", $coord_depart)[0]);
             $col = intval(explode("_", $coord_depart)[1]);
 
-            $str = "<form action=\"action.php\" method=\"GET\">
-            <table >
-                <tbody>";
+            $str = "<form action=\"action.php\" method=\"GET\"><table ><tbody>";
 
-            for($i=0; $i < $tablier->getNbLignes(); $i++){
-                $str += "<tr>";
-                for($j=0; $j < $tablier->getNbColonnes(); $j++) {
-                    $str += "<td>
-                                    <button class='";
-                    switch($tablier->getCase($i, $j)->getValeur()){
-                        case 0: {return "vide'";break;}
-                        case 1: {return "bille'";break;} 
-                        default: {return "neutralise'";break;} 
+            for( $i = 0; $i < $this->ts->getNbLignes(); $i++ ) {
+                $str .= "<tr>";
+
+                for( $j = 0; $j < $this->ts->getNbColonnes(); $j++ ) {
+                    $str .= "<td><button class='";
+                    switch($this->ts->getCase($i, $j)->getValeur()) {
+                        case -1: { $str .= "neutralise"; break; }
+                        case  0: { $str .= "vide";       break; }
+                        case  1: { $str .= "bille";      break; }
                     }
-                    $str += "name='coord' value='".$i."_".$j."'"; 
 
-                    if(!$tablier->estValideMvt($lig,$col, $i, $j)) $str+= "disabled";
+                    $str .= "'name='coord' value='" . $i . "_" . $j . "'"; 
 
-                    $str += "><figure class=\"image is-96x96\"><img src=\"ressources/";
-                    if($tablier->getCase($i, $j)->getValeur() == CaseSolitaire::BILLE){
-                        $str+= "CaseBille.png";
-                    }elseif($tablier->getCase($i, $j)->getValeur() == CaseSolitaire::VIDE) {
-                        $str+= "CaseVide.png";
+                    if(!$this->ts->estValideMvt($lig,$col, $i, $j)) $str.= "disabled";
+
+                    $str .= "><figure class=\"image is-96x96\"><img src=\"ressources/";
+                    switch($this->ts->getCase($i, $j)->getValeur()) {
+                        case  0: { $str .= "CaseVide.png";  break; }
+                        case  1: { $str .= "CaseBille.png"; break; }
                     }
-                    $str = "</figure>
-                                        </button>
-                                    </td>";
+
+                    $str .= "</figure></button></td>";
                 }
-                $str+="</tr>";
+
+                $str.="</tr>";
             }
-            $str +="</tbody>
-            </table>
-        </form>";
-                
 
-
-            return $str;
+            return $str .="</tbody></table></form>";
         }
 
         /**
@@ -101,10 +96,31 @@
          * lorsque la partie est terminée.
          * @return String Chaine de caractères intégrant le code HTML.
          */
-        public function getTablierFinal(): String {}
+        public function getTablierFinal(): String {
+            $str = "<table><tbody>";
 
-        
+            for( $i = 0; $i < $this->ts->getNbLignes(); $i++ ) {
+                $str .= "<tr>";
 
-        private function getBoutonCaseSolitaire(String $classe, int $ligne, int $colonne, bool $disabled) : String {}
+                for( $j = 0; $j < $this->ts->getNbColonnes(); $j++ ) {
+                    $str .= "<td><figure class=\"image is-96x96\">";
+
+                    switch($this->ts->getCase($i, $j)->getValeur()) {
+                        case 0: { $str .= "<img src=\"ressources/CaseVide.png\">";  break; }
+                        case 1: { $str .= "<img src=\"ressources/CaseBille.png\">"; break; }
+                    }
+
+                    $str .= "</figure></td>";
+                }
+
+                $str .= "</tr>";
+            }
+
+            return $str;
+        }
+
+        private function getBoutonCaseSolitaire(String $classe, int $ligne, int $colonne, bool $disabled) : String {
+            return "<button class=\"" . $classe . "\" name=\"coord\" value=\"" . $ligne . "_" . $colonne . "\" " . ($disabled ? "disabled" : "") . ">";
+        }
     }
 ?>
