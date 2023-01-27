@@ -3,7 +3,7 @@
 	 * Classe CaseSolitaire
 	 */
 	class CaseSolitaire {
-		public static const BILLE      = 1;
+		public const BILLE      = 1;
 		public const VIDE       = 0;
 		public const NEUTRALISE = -1;
 		
