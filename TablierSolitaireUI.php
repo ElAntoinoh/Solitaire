@@ -14,7 +14,36 @@
          * sélectionner une bille jouable
          * @param String Chaine de caractères intégrant le code HTML.
          */
-        public function getFormulaireOrigine(): String {}
+        public function getFormulaireOrigine(): String {
+            $str = "<form action=\"action.php\" method=\"GET\"><table><tbody>";
+
+            for( $i = 0; $i < $this->ts->getNbLignes(); $i++ ) {
+                $str .= "<tr>";
+
+                for( $j = 0; $j < $this->ts->getNbColonnes(); $j++ ) {
+                    $str .= "<td><button class='";
+                    switch($this->ts->getCase($i, $j)->getValeur()) {
+                        case -1: { $str .= "neutralise"; break; } 
+                        case  0: { $str .= "vide";       break; }
+                        case  1: { $str .= "bille";      break; }
+                    }
+                    
+                    $str .= "' name='coord' value='" . $i . "_" . $j . "' " . ($this->ts->isBilleJouable($i, $j) ? "" : "disabled") . ">";
+
+                    $str .= "<figure class=\"image is-96x96\">";
+                    switch($this->ts->getCase($i, $j)->getValeur()) {
+                        case  0: { $str .= "<img src=\"ressources/CaseVide.png\">";  break; }
+                        case  1: { $str .= "<img src=\"ressources/CaseBille.png\">"; break; }
+                    }
+
+                    $str .= "</figure></button></td>";
+                }
+
+                $str .= "</tr>";
+            }
+
+            return $str;
+        }
 
         /**
          * Retourne une chaîne de caractères intégrant le code HTML d'un formulaire permettant de
