@@ -112,8 +112,8 @@ class TablierSolitaire {
 			$numColArrivee < 0 || $numColArrivee >= $this->nbColonnes ) return false;
 		
 		// Vérification que le déplacement est conforme
-		if( !(abs($numLigDepart - $numLigArrivee) == 2 && $numColDepart == $numColArrivee) ||
-			 (abs($numColDepart - $numColArrivee) == 2 && $numLigDepart == $numLigArrivee) ) return false;
+		if( !((abs($numLigDepart - $numLigArrivee) == 2 && $numColDepart == $numColArrivee) ||
+			  (abs($numColDepart - $numColArrivee) == 2 && $numLigDepart == $numLigArrivee)    ) ) return false;
 		
 		// Vérification que la case de départ est bien occupée
 		if( !$this->tablier[$numLigDepart][$numColDepart]->isCaseBille() ) return false;
