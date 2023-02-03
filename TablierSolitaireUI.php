@@ -25,8 +25,8 @@
 
                     switch($this->ts->getCase($i, $j)->getValeur()) {
                         case -1: { $classe = "\" hidden "; break; }
-                        case  0: { $classe = "vide\" ";       break; }
-                        case  1: { $classe = "bille\" ";      break; }
+                        case  0: { $classe = "vide\" ";    break; }
+                        case  1: { $classe = "bille\" ";   break; }
                     }
 
                     $str .= TablierSolitaireUI::getBoutonCaseSolitaire($classe, $i, $j, $this->ts->isBilleJouable($i, $j));
@@ -69,13 +69,13 @@
 
                     switch($this->ts->getCase($i, $j)->getValeur()) {
                         case -1: { $classe = "\" hidden "; break; }
-                        case  0: { $classe = "vide\" ";       break; }
-                        case  1: { $classe = "bille \" ";      break; }
+                        case  0: { $classe = "vide\" ";    break; }
+                        case  1: { $classe = "bille \" ";  break; }
                     }
 
-                    if( $i == $lig && $j ==$col){
-                        $str .= "<button class=\"" . $classe. "\">";
-                    }else{
+                    if( $i == $lig && $j == $col ) {
+                        $str .= "<button class=\"".$classe."\">";
+                    } else {
                         $str .= TablierSolitaireUI::getBoutonCaseSolitaire($classe, $i, $j, $this->ts->estValideMvt($lig,$col, $i, $j));
                     }
                     
