@@ -1,9 +1,9 @@
 <?php 
-
 	include "TablierSolitaireUI.php";
 	include "TablierSolitaire.php";
+
 	session_start();
-	?>
+?>
 
 <!DOCTYPE html>
 <html>
@@ -21,45 +21,25 @@
 					Nouvelle Partie
 				</button>
 			</form>
+
 			<?php
-			if( !isset($_SESSION['Tablier']) || !isset($_GET) ) {
+				if( !isset($_SESSION['Tablier']) ) {
 					$_SESSION['Tablier'] = TablierSolitaire::initTablierEuropeen();
+				}
 
-					$UI = new TablierSolitaireUI($_SESSION['Tablier']);
+				$UI = new TablierSolitaireUI($_SESSION['Tablier']);
 
-					echo $UI->getFormulaireOrigine();
-			}
-			else{
-				if ( isset($_GET) ){
-					if (isset($_GET['finDePartie'])) {
-						$UI = new TablierSolitaireUI($_SESSION['Tablier']);
-		
-						echo "<p class=\"has-text-white is-size-2\">".$_GET['finDePartie']."</p>";
-
-						echo $UI->getFormulaireOrigine();
-	
-						
-					}elseif( isset($_GET['action']) ){
-						switch($_GET['action']){
-							case "selectionner" :
-								$UI = new TablierSolitaireUI($_SESSION['Tablier']);
-	
-								echo $UI->getFormulaireOrigine();
-								break;
-							case "poser":				
-								$UI = new TablierSolitaireUI($_SESSION['Tablier']);
-	
-								echo $UI->getFormulaireDestination($_GET['coord']);
-	
-								break;
-						}
-					}else{
-						$UI = new TablierSolitaireUI($_SESSION['Tablier']);
-	
-						echo $UI->getFormulaireOrigine();
+				if( !isset($_GET['finDePartie']) ) {
+					if( isset($_GET['action']) and $_GET['action'] == "poser" ) {
+						echo $UI->getFormulaireDestination($_GET['coord']);
+						exit();
 					}
-				} 
-			} ?>
+				} else {
+					echo "<p class=\"has-text-white is-size-2\">".$_GET['finDePartie']."</p>";
+				}
+
+				echo $UI->getFormulaireOrigine();
+			?>
   		</section>
 	</body>
 </html>
