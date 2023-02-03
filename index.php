@@ -16,6 +16,11 @@
 
 	<body background="ressources/fondBois.jpg">
 		<section class="section is-align-center" >
+			<form action="action.php" method="GET">
+				<button name="action" value="nouvellePartie">
+					Nouvelle Partie
+				</button>
+			</form>
 			<?php
 			if( !isset($_SESSION['Tablier']) ) {
 					$_SESSION['Tablier'] = TablierSolitaire::initTablierEuropeen();
@@ -24,25 +29,31 @@
 
 					echo $UI->getFormulaireOrigine();
 			}else{
-				if( isset($_GET) && isset($_GET['action']) ){
-					switch($_GET['action']){
-						case "selectionner" :
-							$UI = new TablierSolitaireUI($_SESSION['Tablier']);
+				if ( isset($_GET) && isset($_GET['finDePartie']) ){
+					$UI = new TablierSolitaireUI($_SESSION['Tablier']);
+	
+					echo $UI->getFormulaireOrigine();
 
-							echo $UI->getFormulaireOrigine();
-							break;
-						case "poser":				
-							$UI = new TablierSolitaireUI($_SESSION['Tablier']);
+					echo "<p> Fin".$_GET['finDePartie']."</p>";
 
-							echo $UI->getFormulaireDestination($_GET['coord']);
-
-							break;
+				}else{
+					if( isset($_GET) && isset($_GET['action']) ){
+						switch($_GET['action']){
+							case "selectionner" :
+								$UI = new TablierSolitaireUI($_SESSION['Tablier']);
+	
+								echo $UI->getFormulaireOrigine();
+								break;
+							case "poser":				
+								$UI = new TablierSolitaireUI($_SESSION['Tablier']);
+	
+								echo $UI->getFormulaireDestination($_GET['coord']);
+	
+								break;
+						}
 					}
 				}
-			}
-
-
-			?>
-  	</section>
+			} ?>
+  		</section>
 	</body>
 </html>

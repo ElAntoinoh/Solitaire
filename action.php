@@ -25,8 +25,14 @@ function realiserMouvement(String $coord_depart, String $coord_arrivee): void {
 if( isset($_GET['action']) ){
 	switch($_GET['action']){
 		case "selectionner" :
-			header("HTTP/1.1 303 See Other");
-			header("Location: index.php?action=poser&coord=".$_GET['coord']);
+			if( !$_SESSION['Tablier']->isFinDePartie() ){
+				header("HTTP/1.1 303 See Other");
+				header("Location: index.php?action=poser&coord=".$_GET['coord']);
+			}else{
+				header("HTTP/1.1 303 See Other");
+				header("Location: index.php?finDePartie=".$_SESSION['Tablier']->isVictoire() ? "Victoire" : "Défaite");
+			}
+			
 			exit;
 			break;
 		case "poser":	
@@ -36,11 +42,30 @@ if( isset($_GET['action']) ){
 			    intval(explode("_", $_GET['coord_depart'])[1]),
 			    intval(explode("_", $_GET['coord'])[0]),
 			    intval(explode("_", $_GET['coord'])[1])
-			);						
-			header("HTTP/1.1 303 See Other");
-			header("Location: index.php?action=selectionner");
-			exit;
+			);	
 
+			if( !$_SESSION['Tablier']->isFinDePartie() ){
+				header("HTTP/1.1 303 See Other");
+				header("Location: index.php?action=selectionner");
+			}else{
+				echo "test";
+				header("HTTP/1.1 303 See Other");
+				if( $_SESSION['Tablier']->isVictoire()){
+					header("Location: index.php?finDePartie=Victoire");
+				}else{
+					header("Location: index.php?finDePartie=Defaite");
+				}
+				
+			}					
+			
+			exit;
+			break;
+		case "nouvellePartie":	
+			session_destroy();
+			header("HTTP/1.1 303 See Other");
+			header("Location: index.php");				
+			
+			exit;
 			break;
 	}
 }
