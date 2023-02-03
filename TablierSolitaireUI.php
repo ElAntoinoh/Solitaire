@@ -24,9 +24,9 @@
                     $str .= "<td>";
 
                     switch($this->ts->getCase($i, $j)->getValeur()) {
-                        case -1: { $classe = "neutralise"; break; }
-                        case  0: { $classe = "vide";       break; }
-                        case  1: { $classe = "bille";      break; }
+                        case -1: { $classe = "\" hidden "; break; }
+                        case  0: { $classe = "vide\" ";       break; }
+                        case  1: { $classe = "bille\" ";      break; }
                     }
 
                     $str .= TablierSolitaireUI::getBoutonCaseSolitaire($classe, $i, $j, $this->ts->isBilleJouable($i, $j));
@@ -68,12 +68,17 @@
                     $str .= "<td>";
 
                     switch($this->ts->getCase($i, $j)->getValeur()) {
-                        case -1: { $classe = "neutralise"; break; }
-                        case  0: { $classe = "vide";       break; }
-                        case  1: { $classe = "bille";      break; }
+                        case -1: { $classe = "\" hidden "; break; }
+                        case  0: { $classe = "vide\" ";       break; }
+                        case  1: { $classe = "bille \" ";      break; }
                     }
 
-                    $str .= TablierSolitaireUI::getBoutonCaseSolitaire($classe, $i, $j, $this->ts->estValideMvt($lig,$col, $i, $j));
+                    if( $i == $lig && $j ==$col){
+                        $str .= "<button class=\"" . $classe. "\">";
+                    }else{
+                        $str .= TablierSolitaireUI::getBoutonCaseSolitaire($classe, $i, $j, $this->ts->estValideMvt($lig,$col, $i, $j));
+                    }
+                    
 
                     $str .= "<figure class=\"image is-96x96\">";
                     switch($this->ts->getCase($i, $j)->getValeur()) {
@@ -122,7 +127,7 @@
         }
 
         private function getBoutonCaseSolitaire(String $classe, int $ligne, int $colonne, bool $disabled) : String {
-            return "<button class=\"" . $classe . "\" name=\"coord\" value=\"" . $ligne . "_" . $colonne . "\" " . ($disabled ? "" : "disabled") . ">";
+            return "<button " ."class=\"".$classe." name=\"coord\" value=\"" . $ligne . "_" . $colonne . "\" " . ($disabled ? "" : "disabled") . ">";
         }
     }
 ?>

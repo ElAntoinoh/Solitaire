@@ -34,9 +34,11 @@
 					if (isset($_GET['finDePartie'])) {
 						$UI = new TablierSolitaireUI($_SESSION['Tablier']);
 		
+						echo "<p class=\"has-text-white is-size-2\">".$_GET['finDePartie']."</p>";
+
 						echo $UI->getFormulaireOrigine();
 	
-						echo "<p> Fin".$_GET['finDePartie']."</p>";
+						
 					}elseif( isset($_GET['action']) ){
 						switch($_GET['action']){
 							case "selectionner" :
