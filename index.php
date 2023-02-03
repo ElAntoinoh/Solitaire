@@ -22,22 +22,22 @@
 				</button>
 			</form>
 			<?php
-			if( !isset($_SESSION['Tablier']) ) {
+			if( !isset($_SESSION['Tablier']) || !isset($_GET) ) {
 					$_SESSION['Tablier'] = TablierSolitaire::initTablierEuropeen();
 
 					$UI = new TablierSolitaireUI($_SESSION['Tablier']);
 
 					echo $UI->getFormulaireOrigine();
-			}else{
-				if ( isset($_GET) && isset($_GET['finDePartie']) ){
-					$UI = new TablierSolitaireUI($_SESSION['Tablier']);
+			}
+			else{
+				if ( isset($_GET) ){
+					if (isset($_GET['finDePartie'])) {
+						$UI = new TablierSolitaireUI($_SESSION['Tablier']);
+		
+						echo $UI->getFormulaireOrigine();
 	
-					echo $UI->getFormulaireOrigine();
-
-					echo "<p> Fin".$_GET['finDePartie']."</p>";
-
-				}else{
-					if( isset($_GET) && isset($_GET['action']) ){
+						echo "<p> Fin".$_GET['finDePartie']."</p>";
+					}elseif( isset($_GET['action']) ){
 						switch($_GET['action']){
 							case "selectionner" :
 								$UI = new TablierSolitaireUI($_SESSION['Tablier']);
@@ -51,8 +51,12 @@
 	
 								break;
 						}
+					}else{
+						$UI = new TablierSolitaireUI($_SESSION['Tablier']);
+	
+						echo $UI->getFormulaireOrigine();
 					}
-				}
+				} 
 			} ?>
   		</section>
 	</body>
