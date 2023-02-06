@@ -4,12 +4,15 @@
 
 	header("HTTP/1.1 303 See Other");
 
-	$str = "Location: index.php";
+	$name = preg_split("(\.php)", $_SERVER["HTTP_REFERER"])[0];
+
+	$str = "Location: ". $name .".php";
 
 	if( isset($_GET['action']) ) {
 		switch( $_GET['action'] ) {
 			case "selectionner": {
 				$str .= "?action=poser&coord=".$_GET['coord'];
+				break;
 			}
 
 			case "poser": {
