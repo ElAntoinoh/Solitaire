@@ -15,7 +15,7 @@
          * @param String Chaine de caractères intégrant le code HTML.
          */
         public function getFormulaireOrigine(): String {
-            $str = "<form action=\"action.php\" method=\"GET\"><table><tbody>";
+            $str = "<form  style=\"display:inline-block\" action=\"action.php\" method=\"GET\"><table ><tbody>";
 
             for( $i = 0; $i < $this->ts->getNbLignes(); $i++ ) {
                 $str .= "<tr>";
@@ -31,13 +31,7 @@
 
                     $str .= TablierSolitaireUI::getBoutonCaseSolitaire($classe, $i, $j, $this->ts->isBilleJouable($i, $j));
 
-                    $str .= "<figure class=\"image is-96x96\">";
-                    switch($this->ts->getCase($i, $j)->getValeur()) {
-                        case  0: { $str .= "<img src=\"ressources/CaseVide.png\">";  break; }
-                        case  1: { $str .= "<img src=\"ressources/CaseBille.png\">"; break; }
-                    }
-
-                    $str .= "</figure></button></td>";
+                    $str .= TablierSolitaireUI::getFigureCase($i, $j);
                 }
 
                 $str .= "</tr>";
@@ -80,13 +74,7 @@
                     }
                     
 
-                    $str .= "<figure class=\"image is-96x96\">";
-                    switch($this->ts->getCase($i, $j)->getValeur()) {
-                        case  0: { $str .= "<img src=\"ressources/CaseVide.png\">";  break; }
-                        case  1: { $str .= "<img src=\"ressources/CaseBille.png\">"; break; }
-                    }
-
-                    $str .= "</figure></button></td>";
+                    $str .= TablierSolitaireUI::getFigureCase($i, $j);
                 }
 
                 $str.="</tr>";
@@ -129,5 +117,17 @@
         private function getBoutonCaseSolitaire(String $classe, int $ligne, int $colonne, bool $disabled) : String {
             return "<button " ."class=\"".$classe." name=\"coord\" value=\"" . $ligne . "_" . $colonne . "\" " . ($disabled ? "" : "disabled") . ">";
         }
+
+		private function getFigureCase(int $ligne, int $colonne){
+			$s = "<figure class=\"image is-64x64-desktop is-32x32-mobile is-48x48-tablet\">";
+			switch($this->ts->getCase($ligne, $colonne)->getValeur()) {
+				case  0: { $s .= "<img src=\"ressources/CaseVide.png\">";  break; }
+				case  1: { $s .= "<img src=\"ressources/CaseBille.png\">"; break; }
+			}
+
+			$s .= "</figure></button></td>";
+
+			return $s;
+		}
     }
 ?>

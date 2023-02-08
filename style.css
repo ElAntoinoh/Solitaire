@@ -3,6 +3,10 @@ button {
     padding: 2px;
 }
 
+form {
+	display: inline-block;
+}
+
 table{
     line-height: 0;
 }
