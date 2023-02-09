@@ -124,7 +124,7 @@
                     $str .= "<td>";
 
                     switch($this->ts->getCase($i, $j)->getValeur()) {
-                        case -1: { $classe = "\" hidden "; break; }
+                        case -1: { $classe = "\"  "; break; }
                         case  0: { $classe = "vide\" ";    break; }
                         case  1: { $classe = "bille\" ";   break; }
                     }
