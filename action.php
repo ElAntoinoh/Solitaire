@@ -37,7 +37,30 @@
 			}
 
 			case "nouvellePartie": {
-				session_destroy();
+				switch($_GET['ChoixPlateau']){
+					case "Europeen" :
+						$_SESSION['Tablier'] = TablierSolitaire::initTablierEuropeen();
+						break;
+					case "Anglais" :
+						$_SESSION['Tablier'] = TablierSolitaire::initTablierAnglais();
+						break;
+					case "Asymetrique" :
+						$_SESSION['Tablier'] = TablierSolitaire::initTablierAsymetrique();
+						break;
+					case "Gagnant" :
+						$_SESSION['Tablier'] = TablierSolitaire::initTablierGagnant();
+						break;
+					case "Perdant" :
+						$_SESSION['Tablier'] = TablierSolitaire::initTablierPerdant();
+						break;
+				}
+
+				break;
+			}
+
+			case "personnaliserTablier": {
+				$str .= "?action=CreationTablier";
+				break;
 			}
 		}
 	}

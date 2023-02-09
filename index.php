@@ -29,27 +29,30 @@
 						<option>Asymetrique</option>
 						<option>Gagnant</option>
 						<option>Perdant</option>
-
 					</select>
+
+					<button name="action" value="personnaliserTablier">
+						Personnaliser
+					</button>
 				</form>
 
 				<?php
-					if( !isset($_SESSION['Tablier']) ) {
-						$_SESSION['Tablier'] = TablierSolitaire::initTablierEuropeen();
-					}
+					if(isset($_SESSION['Tablier'])){
+						$UI = new TablierSolitaireUI($_SESSION['Tablier']);
 
-					$UI = new TablierSolitaireUI($_SESSION['Tablier']);
-
-					if( !isset($_GET['finDePartie']) ) {
-						if( isset($_GET['action']) and $_GET['action'] == "poser" ) {
-							echo $UI->getFormulaireDestination($_GET['coord']);
-							exit();
+						if( !isset($_GET['finDePartie']) ) {
+							if( isset($_GET['action']) and $_GET['action'] == "poser" ) {
+								echo $UI->getFormulaireDestination($_GET['coord']);
+								exit();
+							}
+						} else {
+							echo "<p class=\"has-text-white is-size-2\">".$_GET['finDePartie']."</p>";
 						}
-					} else {
-						echo "<p class=\"has-text-white is-size-2\">".$_GET['finDePartie']."</p>";
+	
+						echo $UI->getFormulaireOrigine();
+					}elseif( isset($_GET['CreationTablier']) ){
+						/* PARTIE PERSONNALISATION */
 					}
-
-					echo $UI->getFormulaireOrigine();
 				?>
 			</section>
 		</div>
