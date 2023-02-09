@@ -66,9 +66,8 @@
 						<option <?php if($_SESSION['tablierActuel']== "Anglais") echo "selected";?>>Anglais</option>
 						<option <?php if($_SESSION['tablierActuel']== "Asymetrique") echo "selected";?>>Asymetrique</option>
 						<?php
-						if( isset($_SESSION['TablierPerso'])):?>
+						if( isset($_SESSION['TablierPerso']) && !$_SESSION['TablierPerso']->isFinDePartie()):?>
 							<option <?php if($_SESSION['tablierActuel']== "Personnaliser") echo "selected";?>>Personnaliser</option>
-
 						<?php endif;?>
 						<option <?php if($_SESSION['tablierActuel']== "Gagnant") echo "selected";?>>Gagnant</option>
 						<option <?php if($_SESSION['tablierActuel']== "Perdant") echo "selected";?>>Perdant</option>
