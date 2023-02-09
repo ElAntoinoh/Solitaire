@@ -14,23 +14,22 @@ class TablierSolitaire {
 	private $nbColonnes;
 
 	protected $tablier;
-	
+
 	/**
 	 * Constructeur de la classe TablierSolitaire
-	 * @param int $nblig Nombre de lignes du tablier
-	 * @param int $nbcol Nombre de colonnes du tablier
+	 * @param array $tab Tableau à deux dimensions contenant les valeurs des cases du tablier
 	 */
-	private function __construct(int $nblig = 5, int $nbcol = 5) {
-		$this->nbLignes = $nblig;
-		$this->nbColonnes = $nbcol;
+	private function __construct(array $tab) {
+		$this->nbLignes   = count($tab);
+		$this->nbColonnes = count($tab[0]);
+
 		$this->tablier = array();
 
-		// Remplissage du tablier avec des billes
 		for( $i = 0; $i < $this->nbLignes; $i++ ) {
 			$this->tablier[$i] = array();
 
 			for( $j = 0; $j < $this->nbColonnes; $j++ ) {
-				$this->tablier[$i][$j] = new CaseSolitaire();
+				$this->tablier[$i][$j] = new CaseSolitaire($tab[$i][$j]);
 			}
 		}
 	}
@@ -302,101 +301,55 @@ class TablierSolitaire {
 	 * Initialise un tablier européen
 	 * @return TablierSolitaire Tablier initialisé
 	 */
-	public static function initTablierEuropeen(): TablierSolitaire{
-		$tablier = new TablierSolitaire(7,7);
-
-		$tablier->neutraliseCase(0,1);
-		$tablier->neutraliseCase(1,0);
-		$tablier->neutraliseCase(0,0);
-
-		$tablier->neutraliseCase(0,6);
-		$tablier->neutraliseCase(0,5);
-		$tablier->neutraliseCase(1,6);
-
-		$tablier->neutraliseCase(6,0);
-		$tablier->neutraliseCase(5,0);
-		$tablier->neutraliseCase(6,1);
-
-		$tablier->neutraliseCase(6,6);
-		$tablier->neutraliseCase(6,5);
-		$tablier->neutraliseCase(5,6);
-
-		$tablier->videCase(3,3);
-
-		return $tablier;
+	public static function initTablierEuropeen(): TablierSolitaire {
+		return new TablierSolitaire(array(
+			array(-1, -1, -1,  1,  1,  1, -1, -1, -1),
+			array(-1, -1, -1,  1,  1,  1, -1, -1, -1),
+			array(-1, -1, -1,  1,  1,  1, -1, -1, -1),
+			array( 1,  1,  1,  1,  1,  1,  1,  1,  1),
+			array( 1,  1,  1,  1,  0,  1,  1,  1,  1),
+			array( 1,  1,  1,  1,  1,  1,  1,  1,  1),
+			array(-1, -1, -1,  1,  1,  1, -1, -1, -1),
+			array(-1, -1, -1,  1,  1,  1, -1, -1, -1),
+			array(-1, -1, -1,  1,  1,  1, -1, -1, -1),
+		));
 	}
 
 	/**
 	 * Initialise un tablier anglais
 	 * @return TablierSolitaire Tablier initialisé
 	 */
-	public static function initTablierAnglais(): TablierSolitaire{
-		$tablier = new TablierSolitaire(7,7);
-
-		$tablier->neutraliseCase(0,1);
-		$tablier->neutraliseCase(1,0);
-		$tablier->neutraliseCase(0,0);
-		$tablier->neutraliseCase(1,1);
-
-		$tablier->neutraliseCase(0,6);
-		$tablier->neutraliseCase(0,5);
-		$tablier->neutraliseCase(1,6);
-		$tablier->neutraliseCase(1,5);
-
-		$tablier->neutraliseCase(6,0);
-		$tablier->neutraliseCase(5,0);
-		$tablier->neutraliseCase(6,1);
-		$tablier->neutraliseCase(5,1);
-
-		$tablier->neutraliseCase(6,6);
-		$tablier->neutraliseCase(6,5);
-		$tablier->neutraliseCase(5,6);
-		$tablier->neutraliseCase(5,5);
-
-		$tablier->videCase(3,3);
-
-		return $tablier;
+	public static function initTablierAnglais(): TablierSolitaire {
+		return new TablierSolitaire(array(
+			array(-1, -1,  1,  1,  1, -1, -1),
+			array(-1, -1,  1,  1,  1, -1, -1),
+			array( 1,  1,  1,  1,  1,  1,  1),
+			array( 1,  1,  1,  0,  1,  1,  1),
+			array( 1,  1,  1,  1,  1,  1,  1),
+			array(-1, -1,  1,  1,  1, -1, -1,),
+			array(-1, -1,  1,  1,  1, -1, -1,)
+		));
 	}
 
 	/**
 	 * Initialise un tablier asymétrique
 	 * @return TablierSolitaire Tablier initialisé
 	 */
-	public static function initTablierAsymetrique(): TablierSolitaire{
-		$tablier = new TablierSolitaire(8,8);
+	public static function initTablierAsymetrique(): TablierSolitaire {
+		return new TablierSolitaire(array(
+			array(-1, -1,  1,  1,  1, -1, -1, -1),
+			array(-1, -1,  1,  1,  1, -1, -1, -1),
+			array(-1, -1,  1,  1,  1, -1, -1, -1),
+			array( 1,  1,  1,  1,  1,  1,  1,  1),
+			array( 1,  1,  1,  0,  1,  1,  1,  1),
+			array( 1,  1,  1,  1,  1,  1,  1,  1),
+			array(-1, -1,  1,  1,  1, -1, -1, -1),
+			array(-1, -1,  1,  1,  1, -1, -1, -1),
+		));
+	}
 
-		$tablier->neutraliseCase(0,0);
-		$tablier->neutraliseCase(0,1);
-		$tablier->neutraliseCase(1,0);
-		$tablier->neutraliseCase(1,1);
-		$tablier->neutraliseCase(2,0);
-		$tablier->neutraliseCase(2,1);
-
-		$tablier->neutraliseCase(0,7);
-		$tablier->neutraliseCase(0,6);
-		$tablier->neutraliseCase(0,5);
-		$tablier->neutraliseCase(1,7);
-		$tablier->neutraliseCase(1,6);
-		$tablier->neutraliseCase(1,5);
-		$tablier->neutraliseCase(2,7);
-		$tablier->neutraliseCase(2,6);
-		$tablier->neutraliseCase(2,5);
-
-		$tablier->neutraliseCase(7,0);
-		$tablier->neutraliseCase(6,0);
-		$tablier->neutraliseCase(7,1);
-		$tablier->neutraliseCase(6,1);
-
-		$tablier->neutraliseCase(7,7);
-		$tablier->neutraliseCase(7,6);
-		$tablier->neutraliseCase(7,5);
-		$tablier->neutraliseCase(6,7);
-		$tablier->neutraliseCase(6,6);
-		$tablier->neutraliseCase(6,5);
-
-		$tablier->videCase(4, 3);
-
-		return $tablier;
+	public static function initTablierPersonalise(array $tab): TablierSolitaire {
+		return new TablierSolitaire($tab);
 	}
 
 	/**
@@ -404,16 +357,11 @@ class TablierSolitaire {
 	 * @return TablierSolitaire Tablier initialisé
 	 */
 	public static function initTablierPerdant(): TablierSolitaire {
-		$tablier = new TablierSolitaire(3,3);
-
-		
-		$tablier->videCase(0,1);
-		$tablier->videCase(0,2);
-		$tablier->videCase(1,1);
-		$tablier->videCase(1,2);
-		$tablier->videCase(2,0);
-
-		return $tablier;
+		return new TablierSolitaire(array(
+			array(1, 0, 0),
+			array(1, 0, 0),
+			array(0, 1, 1)
+		));
 	}
 
 	/**
@@ -421,13 +369,11 @@ class TablierSolitaire {
 	 * @return TablierSolitaire Tablier initialisé
 	 */
 	public static function initTablierGagnant(): TablierSolitaire {
-		$tablier = TablierSolitaire::initTablierPerdant();
-
-		$tablier->videCase(2,0);
-		$tablier->videCase(0,0);
-		$tablier->videCase(1,0);
-
-		return $tablier;
+		return new TablierSolitaire(array(
+			array(0, 0, 0),
+			array(0, 0, 0),
+			array(0, 1, 1)
+		));
 	}
 }
 ?>
