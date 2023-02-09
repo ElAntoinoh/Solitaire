@@ -37,7 +37,11 @@
 				</form>
 
 				<?php
-					if(isset($_SESSION['Tablier'])){
+					if( isset($_GET['action']) && $_GET['action']="CreationTablier" ){
+						/* PARTIE PERSONNALISATION */
+						echo "test";
+					}
+					elseif(isset($_SESSION['Tablier'])){
 						$UI = new TablierSolitaireUI($_SESSION['Tablier']);
 
 						if( !isset($_GET['finDePartie']) ) {
@@ -50,8 +54,6 @@
 						}
 	
 						echo $UI->getFormulaireOrigine();
-					}elseif( isset($_GET['CreationTablier']) ){
-						/* PARTIE PERSONNALISATION */
 					}
 				?>
 			</section>
