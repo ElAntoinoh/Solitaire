@@ -62,6 +62,43 @@
 				$str .= "?action=CreationTablier";
 				break;
 			}
+
+			case "CreerTablierPerso": {
+				$tab;
+				for ($i = 0; $i < $_GET['lignePerso']; $i++) {
+					for ($j = 0; $j < $_GET['colonnePerso']; $j++) {
+					  $tab[$i][$j] = 1;
+					}
+				}
+
+				$_SESSION['TablierPerso'] = TablierSolitaire::initTablierPersonalise($tab);
+
+
+				$str .= "?action=CreationTablier";
+				break;
+			}
+
+			case "changeCasePerso": {
+				$ligne = intval(explode("_", $_GET['coord']       )[0]);
+				$colonne = intval(explode("_", $_GET['coord']       )[1]);
+				$valeurCase = $_SESSION['TablierPerso'] -> getCase($ligne, $colonne)->getValeur();
+
+				switch($valeurCase){
+					case -1 :
+						$_SESSION['TablierPerso'] -> remplitCase($ligne, $colonne);
+						break;
+					case  0 :
+						$_SESSION['TablierPerso'] -> neutraliseCase($ligne, $colonne);
+						break;
+					case  1 :
+						$_SESSION['TablierPerso'] -> videCase($ligne, $colonne);
+						break;
+				}
+
+
+				$str .= "?action=CreationTablier";
+				break;
+			}
 		}
 	}
 

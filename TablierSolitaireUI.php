@@ -15,7 +15,7 @@
          * @param String Chaine de caractères intégrant le code HTML.
          */
         public function getFormulaireOrigine(): String {
-            $str = "<form  style=\"display:inline-block\" action=\"action.php\" method=\"GET\"><table ><tbody>";
+            $str = "<form action=\"action.php\" method=\"GET\"><table ><tbody>";
 
             for( $i = 0; $i < $this->ts->getNbLignes(); $i++ ) {
                 $str .= "<tr>";
@@ -113,6 +113,33 @@
 
             return $str;
         }
+
+		public function getFormulairePersonnalisation(){
+			$str = "<form action=\"action.php\" method=\"GET\"><table ><tbody>";
+
+            for( $i = 0; $i < $this->ts->getNbLignes(); $i++ ) {
+                $str .= "<tr>";
+
+                for( $j = 0; $j < $this->ts->getNbColonnes(); $j++ ) {
+                    $str .= "<td>";
+
+                    switch($this->ts->getCase($i, $j)->getValeur()) {
+                        case -1: { $classe = "\" hidden "; break; }
+                        case  0: { $classe = "vide\" ";    break; }
+                        case  1: { $classe = "bille\" ";   break; }
+                    }
+
+                    $str .= TablierSolitaireUI::getBoutonCaseSolitaire($classe, $i, $j, true);
+
+                    $str .= TablierSolitaireUI::getFigureCase($i, $j);
+                }
+
+                $str .= "</tr>";
+            }
+            $str .= "<input type='hidden' name='action' value='changeCasePerso'/>";
+
+            return $str .= "</tbody></table></form>";
+		}
 
         private function getBoutonCaseSolitaire(String $classe, int $ligne, int $colonne, bool $disabled) : String {
             return "<button " ."class=\"".$classe." name=\"coord\" value=\"" . $ligne . "_" . $colonne . "\" " . ($disabled ? "" : "disabled") . ">";

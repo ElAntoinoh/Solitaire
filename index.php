@@ -17,6 +17,41 @@
 
 	<body background="ressources/fondBois.jpg">
 		<div class="container has-text-centered">
+		
+			<section class="section" >
+				<?php
+					if( isset($_GET['action']) && $_GET['action']=="CreationTablier" ){
+						/* PARTIE PERSONNALISATION */
+						if(!isset($_SESSION['TablierPerso'])){
+						?>
+						<form action="action.php" method="GET">
+							<label class="has-text-white">Nombre de lignes : </label><input type="number" name="lignePerso" value="3" required min="3" max="8">
+							<label class="has-text-white">Nombre de colonnes : </label><input type="number" name="colonnePerso" value="3" required min="3" max="8">
+							<button name="action" value="CreerTablierPerso">Valider</button>
+						</form>
+						<?php
+						}else{
+							$UI = new TablierSolitaireUI($_SESSION['TablierPerso']);
+
+							echo $UI->getFormulairePersonnalisation();
+						}
+					}
+					elseif(isset($_SESSION['Tablier'])){
+						$UI = new TablierSolitaireUI($_SESSION['Tablier']);
+
+						if( !isset($_GET['finDePartie']) ) {
+							if( isset($_GET['action']) and $_GET['action'] == "poser" ) {
+								echo $UI->getFormulaireDestination($_GET['coord']);
+								exit();
+							}
+						} else {
+							echo "<p class=\"has-text-white is-size-2\">".$_GET['finDePartie']."</p>";
+						}
+	
+						echo $UI->getFormulaireOrigine();
+					}
+				?>
+			</section>
 			<section class="section" >
 				<form action="action.php" method="GET">
 					<button name="action" value="nouvellePartie">
@@ -35,27 +70,6 @@
 						Personnaliser
 					</button>
 				</form>
-
-				<?php
-					if( isset($_GET['action']) && $_GET['action']=="CreationTablier" ){
-						/* PARTIE PERSONNALISATION */
-						echo "test";
-					}
-					elseif(isset($_SESSION['Tablier'])){
-						$UI = new TablierSolitaireUI($_SESSION['Tablier']);
-
-						if( !isset($_GET['finDePartie']) ) {
-							if( isset($_GET['action']) and $_GET['action'] == "poser" ) {
-								echo $UI->getFormulaireDestination($_GET['coord']);
-								exit();
-							}
-						} else {
-							echo "<p class=\"has-text-white is-size-2\">".$_GET['finDePartie']."</p>";
-						}
-	
-						echo $UI->getFormulaireOrigine();
-					}
-				?>
 			</section>
 		</div>
 		
