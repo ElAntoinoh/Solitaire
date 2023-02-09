@@ -58,6 +58,8 @@ class TablierSolitaire {
 		return $this->tablier;
 	}
 
+	
+
 	/**
 	 * Retourne la case du tablier
 	 * @param int $ligne Ligne de la case
