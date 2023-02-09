@@ -37,7 +37,7 @@
 				</form>
 
 				<?php
-					if( isset($_GET['action']) && $_GET['action']="CreationTablier" ){
+					if( isset($_GET['action']) && $_GET['action']=="CreationTablier" ){
 						/* PARTIE PERSONNALISATION */
 						echo "test";
 					}
