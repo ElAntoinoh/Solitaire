@@ -62,22 +62,30 @@
 					<?php if( isset($_SESSION['tablierActuel']) ) :?>
 						<select name="ChoixPlateau">
 							<option <?php if($_SESSION['tablierActuel'] == "Europeen"   ) echo "selected";?>>Europeen</option>
-							<option <?php if($_SESSION['tablierActuel'] == "Anglais"    ) echo "selected";?>>Anglais</option>
+							<option <?php if($_SESSION['tablierActuel'] == "Allemand"   ) echo "selected";?>>Allemand</option>
 							<option <?php if($_SESSION['tablierActuel'] == "Asymetrique") echo "selected";?>>Asymetrique</option>
+							<option <?php if($_SESSION['tablierActuel'] == "Anglais"    ) echo "selected";?>>Anglais</option>
+							<option <?php if($_SESSION['tablierActuel'] == "Diamant"    ) echo "selected";?>>Diamant</option>
+
 							<?php if( isset($_SESSION['TablierPerso']) && !$_SESSION['TablierPerso']->isFinDePartie()):?>
 								<option <?php if($_SESSION['tablierActuel'] == "Personnaliser") echo "selected";?>>Personnaliser</option>
 							<?php endif;?>
+
 							<option <?php if($_SESSION['tablierActuel'] == "Gagnant") echo "selected";?>>Gagnant</option>
 							<option <?php if($_SESSION['tablierActuel'] == "Perdant") echo "selected";?>>Perdant</option>
 						</select>
 					<?php else:?>
 						<select name="ChoixPlateau">
 							<option>Europeen</option>
-							<option>Anglais</option>
+							<option>Allemand</option>
 							<option>Asymetrique</option>
+							<option>Anglais</option>
+							<option>Diamant</option>
+
 							<?php if( isset($_SESSION['TablierPerso']) && !$_SESSION['TablierPerso']->isFinDePartie()):?>
 								<option>Personnaliser</option>
 							<?php endif;?>
+							
 							<option>Gagnant</option>
 							<option>Perdant</option>
 						</select>
