@@ -37,7 +37,7 @@
 			}
 
 			case "nouvellePartie": {
-				switch($_GET['ChoixPlateau']){
+				switch($_GET['ChoixPlateau']) {
 					case "Europeen" :
 						$_SESSION['Tablier'] = TablierSolitaire::initTablierEuropeen();
 						$_SESSION['tablierActuel'] = "Europeen";
@@ -59,16 +59,15 @@
 						$_SESSION['tablierActuel'] = "Perdant";
 						break;
 					case "Personnaliser" :
-						$tab = array();
-						for ($i = 0; $i < $_SESSION['TablierPerso']->getNbLignes(); $i++) {
-							for ($j = 0; $j < $_SESSION['TablierPerso']->getNbColonnes(); $j++) {
-							$tab[$i][$j] = $_SESSION['TablierPerso']->getCase($i, $j)->getValeur();
+						for( $i = 0; $i < $_SESSION['TablierPerso']->getNbLignes(); $i++ ) {
+							for( $j = 0; $j < $_SESSION['TablierPerso']->getNbColonnes(); $j++ ) {
+								$tab[$i][$j] = $_SESSION['TablierPerso']->getCase($i, $j)->getValeur();
 							}
 						}
+						
 						$_SESSION['Tablier'] = TablierSolitaire::initTablierPersonalise($tab);
 						$_SESSION['tablierActuel'] = "Personnaliser";
 						break;
-						
 				}
 
 				break;
@@ -80,37 +79,29 @@
 			}
 
 			case "CreerTablierPerso": {
-				$tab;
-				for ($i = 0; $i < $_GET['lignePerso']; $i++) {
-					for ($j = 0; $j < $_GET['colonnePerso']; $j++) {
-					  $tab[$i][$j] = 1;
+				for( $i = 0; $i < $_GET['lignePerso']; $i++ ) {
+					for( $j = 0; $j < $_GET['colonnePerso']; $j++ ) {
+						$tab[$i][$j] = 1;
 					}
 				}
 
 				$_SESSION['TablierPerso'] = TablierSolitaire::initTablierPersonalise($tab);
-
 
 				$str .= "?action=CreationTablier";
 				break;
 			}
 
 			case "changeCasePerso": {
-				$ligne = intval(explode("_", $_GET['coord']       )[0]);
-				$colonne = intval(explode("_", $_GET['coord']       )[1]);
+				$ligne   = intval(explode("_", $_GET['coord'])[0]);
+				$colonne = intval(explode("_", $_GET['coord'])[1]);
+
 				$valeurCase = $_SESSION['TablierPerso'] -> getCase($ligne, $colonne)->getValeur();
 
-				switch($valeurCase){
-					case -1 :
-						$_SESSION['TablierPerso'] -> remplitCase($ligne, $colonne);
-						break;
-					case  0 :
-						$_SESSION['TablierPerso'] -> neutraliseCase($ligne, $colonne);
-						break;
-					case  1 :
-						$_SESSION['TablierPerso'] -> videCase($ligne, $colonne);
-						break;
+				switch($valeurCase) {
+					case -1 : {	$_SESSION['TablierPerso'] -> remplitCase   ($ligne, $colonne); break; }
+					case  0 : {	$_SESSION['TablierPerso'] -> neutraliseCase($ligne, $colonne); break; }
+					case  1 : {	$_SESSION['TablierPerso'] -> videCase      ($ligne, $colonne); break; }
 				}
-
 
 				$str .= "?action=CreationTablier";
 				break;

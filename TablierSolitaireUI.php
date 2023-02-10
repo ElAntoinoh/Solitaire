@@ -146,16 +146,17 @@
         }
 
 		private function getFigureCase(int $ligne, int $colonne){
-			$s = "<figure class=\"image  is-32x32-mobile is-48x48-tablet is-64x64-desktop is-64x64-widescreen is-64x64-fullhd\">";
-			switch($this->ts->getCase($ligne, $colonne)->getValeur()) {
-				case  0: { $s .= "<img src=\"ressources/CaseVide.png\">";  break; }
-				case  1: { $s .= "<img src=\"ressources/CaseBille.png\">"; break; }
-                case -1: { $s .= "<img src=\"ressources/CaseNeutralise.png\">"; break; }
+			$str = "<figure class=\"image  is-32x32-mobile is-48x48-tablet is-64x64-desktop is-64x64-widescreen is-64x64-fullhd\">";
+
+			switch( $this->ts->getCase($ligne, $colonne)->getValeur() ) {
+				case  0: { $str .= "<img src=\"ressources/CaseVide.png\">";       break; }
+				case  1: { $str .= "<img src=\"ressources/CaseBille.png\">";      break; }
+                case -1: { $str .= "<img src=\"ressources/CaseNeutralise.png\">"; break; }
 			}
 
-			$s .= "</figure></button></td>";
+			$str .= "</figure></button></td>";
 
-			return $s;
+			return $str;
 		}
     }
 ?>
