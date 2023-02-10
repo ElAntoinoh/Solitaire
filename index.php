@@ -20,9 +20,7 @@
 		
 			<section class="section" >
 				<?php
-					if( isset($_GET['action']) && $_GET['action']=="CreationTablier" ){
-						/* PARTIE PERSONNALISATION */
-						?>
+					if( isset($_GET['action']) && $_GET['action']=="CreationTablier" ) { ?>
 						<div>
 							<form action="action.php" method="GET">
 								<label class="has-text-white">Nombre de lignes : </label><input type="number" name="lignePerso" value="3" required min="3" max="8">
@@ -30,7 +28,7 @@
 								<button name="action" value="CreerTablierPerso">Valider</button>
 							</form>
 						</div>
-						<?php
+					<?php
 						if(isset($_SESSION['TablierPerso'])){
 							echo "<div>";
 							$UI = new TablierSolitaireUI($_SESSION['TablierPerso']);

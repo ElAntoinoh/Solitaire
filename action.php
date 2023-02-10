@@ -42,6 +42,14 @@
 						$_SESSION['Tablier'] = TablierSolitaire::initTablierEuropeen();
 						$_SESSION['tablierActuel'] = "Europeen";
 						break;
+					case "Allemand" :
+						$_SESSION['Tablier'] = TablierSolitaire::initTablierAllemand();
+						$_SESSION['tablierActuel'] = "Allemand";
+						break;
+					case "Diamant" :
+						$_SESSION['Tablier'] = TablierSolitaire::initTablierDiamant();
+						$_SESSION['tablierActuel'] = "Diamant";
+						break;
 					case "Anglais" :
 						$_SESSION['Tablier'] = TablierSolitaire::initTablierAnglais();
 						$_SESSION['tablierActuel'] = "Anglais";
