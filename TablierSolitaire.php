@@ -305,6 +305,22 @@ class TablierSolitaire {
 	 */
 	public static function initTablierEuropeen(): TablierSolitaire {
 		return new TablierSolitaire(array(
+			array(-1, -1,  1,  1,  1, -1, -1),
+			array(-1,  1,  1,  1,  1,  1, -1),
+			array( 1,  1,  1,  1,  1,  1,  1),
+			array( 1,  1,  1,  0,  1,  1,  1),
+			array( 1,  1,  1,  1,  1,  1,  1),
+			array(-1,  1,  1,  1,  1,  1, -1),
+			array(-1, -1,  1,  1,  1, -1, -1),
+		));
+	}
+
+	/**
+	 * Initialise un tablier allemand
+	 * @return TablierSolitaire Tablier initialisé
+	 */
+	public static function initTablierAllemand(): TablierSolitaire {
+		return new TablierSolitaire(array(
 			array(-1, -1, -1,  1,  1,  1, -1, -1, -1),
 			array(-1, -1, -1,  1,  1,  1, -1, -1, -1),
 			array(-1, -1, -1,  1,  1,  1, -1, -1, -1),
@@ -314,6 +330,23 @@ class TablierSolitaire {
 			array(-1, -1, -1,  1,  1,  1, -1, -1, -1),
 			array(-1, -1, -1,  1,  1,  1, -1, -1, -1),
 			array(-1, -1, -1,  1,  1,  1, -1, -1, -1),
+		));
+	}
+
+	/**
+	 * Initialise un tablier asymétrique
+	 * @return TablierSolitaire Tablier initialisé
+	 */
+	public static function initTablierAsymetrique(): TablierSolitaire {
+		return new TablierSolitaire(array(
+			array(-1, -1,  1,  1,  1, -1, -1, -1),
+			array(-1, -1,  1,  1,  1, -1, -1, -1),
+			array(-1, -1,  1,  1,  1, -1, -1, -1),
+			array( 1,  1,  1,  1,  1,  1,  1,  1),
+			array( 1,  1,  1,  0,  1,  1,  1,  1),
+			array( 1,  1,  1,  1,  1,  1,  1,  1),
+			array(-1, -1,  1,  1,  1, -1, -1, -1),
+			array(-1, -1,  1,  1,  1, -1, -1, -1),
 		));
 	}
 
@@ -334,19 +367,20 @@ class TablierSolitaire {
 	}
 
 	/**
-	 * Initialise un tablier asymétrique
+	 * Initialise un tablier diamant
 	 * @return TablierSolitaire Tablier initialisé
 	 */
-	public static function initTablierAsymetrique(): TablierSolitaire {
+	public static function initTablierDiamant(): TablierSolitaire {
 		return new TablierSolitaire(array(
-			array(-1, -1,  1,  1,  1, -1, -1, -1),
-			array(-1, -1,  1,  1,  1, -1, -1, -1),
-			array(-1, -1,  1,  1,  1, -1, -1, -1),
-			array( 1,  1,  1,  1,  1,  1,  1,  1),
-			array( 1,  1,  1,  0,  1,  1,  1,  1),
-			array( 1,  1,  1,  1,  1,  1,  1,  1),
-			array(-1, -1,  1,  1,  1, -1, -1, -1),
-			array(-1, -1,  1,  1,  1, -1, -1, -1),
+			array(-1, -1, -1, -1,  1, -1, -1, -1, -1),
+			array(-1, -1, -1,  1,  1,  1, -1, -1, -1),
+			array(-1, -1,  1,  1,  1,  1,  1, -1, -1),
+			array(-1,  1,  1,  1,  1,  1,  1,  1, -1),
+			array( 1,  1,  1,  1,  0,  1,  1,  1,  1),
+			array(-1,  1,  1,  1,  1,  1,  1,  1, -1),
+			array(-1, -1,  1,  1,  1,  1,  1, -1, -1),
+			array(-1, -1, -1,  1,  1,  1, -1, -1, -1),
+			array(-1, -1, -1, -1,  1, -1, -1, -1, -1),
 		));
 	}
 
