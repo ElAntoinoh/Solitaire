@@ -53,7 +53,7 @@
 				?>
 			</section>
 
-			<section class="section" >
+			<section class="section">
 				<form action="action.php" method="GET">
 					<button name="action" value="nouvellePartie">
 						Nouvelle Partie
