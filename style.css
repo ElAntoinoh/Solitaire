@@ -6,15 +6,10 @@ form {
 	display: inline-block;
 }
 
-table{
+table {
     line-height: 0;
 }
 
-.neutralise {
-    height: 70px;
-    width:  70px;
-}
-
-body, html {
+html, body {
     height: 100%;
 }

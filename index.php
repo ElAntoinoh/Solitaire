@@ -59,37 +59,27 @@
 						Nouvelle Partie
 					</button>
 
-					<?php if( isset($_SESSION['tablierActuel']) ) :?>
-						<select name="ChoixPlateau">
-							<option <?php if($_SESSION['tablierActuel'] == "Europeen"   ) echo "selected";?>>Europeen</option>
-							<option <?php if($_SESSION['tablierActuel'] == "Allemand"   ) echo "selected";?>>Allemand</option>
-							<option <?php if($_SESSION['tablierActuel'] == "Asymetrique") echo "selected";?>>Asymetrique</option>
-							<option <?php if($_SESSION['tablierActuel'] == "Anglais"    ) echo "selected";?>>Anglais</option>
-							<option <?php if($_SESSION['tablierActuel'] == "Diamant"    ) echo "selected";?>>Diamant</option>
+					<?php
+						$tab = TablierSolitaire::TYPES_TABLIERS;
 
-							<?php if( isset($_SESSION['TablierPerso']) && !$_SESSION['TablierPerso']->isFinDePartie()):?>
-								<option <?php if($_SESSION['tablierActuel'] == "Personnaliser") echo "selected";?>>Personnaliser</option>
-							<?php endif;?>
+						if( isset($_SESSION['TablierPerso']) && !$_SESSION['TablierPerso']->isFinDePartie() ) {
+							array_push($tab, "Personnaliser");
+						}
 
-							<option <?php if($_SESSION['tablierActuel'] == "Gagnant") echo "selected";?>>Gagnant</option>
-							<option <?php if($_SESSION['tablierActuel'] == "Perdant") echo "selected";?>>Perdant</option>
-						</select>
-					<?php else:?>
-						<select name="ChoixPlateau">
-							<option>Europeen</option>
-							<option>Allemand</option>
-							<option>Asymetrique</option>
-							<option>Anglais</option>
-							<option>Diamant</option>
+						$str = "<select name=\"ChoixPlateau\">";
 
-							<?php if( isset($_SESSION['TablierPerso']) && !$_SESSION['TablierPerso']->isFinDePartie()):?>
-								<option>Personnaliser</option>
-							<?php endif;?>
+						$tablierActuelSet = isset($_SESSION['tablierActuel']);
+
+						foreach( $tab as $value ) {
+							$str .= "<option";
 							
-							<option>Gagnant</option>
-							<option>Perdant</option>
-						</select>
-					<?php endif;?>
+							if( $tablierActuelSet && $_SESSION['tablierActuel'] == $value ) $str .= " selected";
+							
+							$str .= ">".$value."</option>";
+						}
+
+						echo $str . "</select>";
+					?>
 
 					<button name="action" value="personnaliserTablier">
 						Personnaliser

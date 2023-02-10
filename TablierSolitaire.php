@@ -10,6 +10,8 @@ class TablierSolitaire {
 	const SUD   = 2;
 	const OUEST = 3;
 
+	const TYPES_TABLIERS = array("Europeen", "Allemand", "Asymetrique", "Anglais", "Diamant", "Gagnant", "Perdant");
+
 	private $nbLignes;
 	private $nbColonnes;
 
