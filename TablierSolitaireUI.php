@@ -62,7 +62,7 @@
                     $str .= "<td>";
 
                     switch($this->ts->getCase($i, $j)->getValeur()) {
-                        case -1: { $classe = "\" hidden "; break; }
+                        case -1: { $classe = "\" hidden  "; break; }
                         case  0: { $classe = "vide\" ";    break; }
                         case  1: { $classe = "bille \" ";  break; }
                     }
@@ -124,7 +124,7 @@
                     $str .= "<td>";
 
                     switch($this->ts->getCase($i, $j)->getValeur()) {
-                        case -1: { $classe = "\"  "; break; }
+                        case -1: { $classe = "neutralise \"  "; break; }
                         case  0: { $classe = "vide\" ";    break; }
                         case  1: { $classe = "bille\" ";   break; }
                     }
@@ -150,6 +150,7 @@
 			switch($this->ts->getCase($ligne, $colonne)->getValeur()) {
 				case  0: { $s .= "<img src=\"ressources/CaseVide.png\">";  break; }
 				case  1: { $s .= "<img src=\"ressources/CaseBille.png\">"; break; }
+                case -1: { $s .= "<img src=\"ressources/CaseNeutralise.png\">"; break; }
 			}
 
 			$s .= "</figure></button></td>";
