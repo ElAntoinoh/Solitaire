@@ -37,46 +37,29 @@
 			}
 
 			case "nouvellePartie": {
-				switch($_GET['ChoixPlateau']) {
-					case "Europeen" :
-						$_SESSION['Tablier'] = TablierSolitaire::initTablierEuropeen();
-						$_SESSION['tablierActuel'] = "Europeen";
-						break;
-					case "Allemand" :
-						$_SESSION['Tablier'] = TablierSolitaire::initTablierAllemand();
-						$_SESSION['tablierActuel'] = "Allemand";
-						break;
-					case "Diamant" :
-						$_SESSION['Tablier'] = TablierSolitaire::initTablierDiamant();
-						$_SESSION['tablierActuel'] = "Diamant";
-						break;
-					case "Anglais" :
-						$_SESSION['Tablier'] = TablierSolitaire::initTablierAnglais();
-						$_SESSION['tablierActuel'] = "Anglais";
-						break;
-					case "Asymetrique" :
-						$_SESSION['Tablier'] = TablierSolitaire::initTablierAsymetrique();
-						$_SESSION['tablierActuel'] = "Asymetrique";
-						break;
-					case "Gagnant" :
-						$_SESSION['Tablier'] = TablierSolitaire::initTablierGagnant();
-						$_SESSION['tablierActuel'] = "Gagnant";
-						break;
-					case "Perdant" :
-						$_SESSION['Tablier'] = TablierSolitaire::initTablierPerdant();
-						$_SESSION['tablierActuel'] = "Perdant";
-						break;
-					case "Personnaliser" :
-						for( $i = 0; $i < $_SESSION['TablierPerso']->getNbLignes(); $i++ ) {
-							for( $j = 0; $j < $_SESSION['TablierPerso']->getNbColonnes(); $j++ ) {
-								$tab[$i][$j] = $_SESSION['TablierPerso']->getCase($i, $j)->getValeur();
-							}
+				if( $_GET['ChoixPlateau'] == "Personnaliser" ) {
+					for( $i = 0; $i < $_SESSION['TablierPerso']->getNbLignes(); $i++ ) {
+						for( $j = 0; $j < $_SESSION['TablierPerso']->getNbColonnes(); $j++ ) {
+							$tab[$i][$j] = $_SESSION['TablierPerso']->getCase($i, $j)->getValeur();
 						}
-						
-						$_SESSION['Tablier'] = TablierSolitaire::initTablierPersonalise($tab);
-						$_SESSION['tablierActuel'] = "Personnaliser";
-						break;
+					}
+					
+					$_SESSION['Tablier'] = TablierSolitaire::initTablierPersonalise($tab);
+				} else {
+					$tab = array(
+						"Europeen"    => TablierSolitaire::initTablierEuropeen(),
+						"Allemand"    => TablierSolitaire::initTablierAllemand(),
+						"Diamant"     => TablierSolitaire::initTablierDiamant(),
+						"Anglais"     => TablierSolitaire::initTablierAnglais(),
+						"Asymetrique" => TablierSolitaire::initTablierAsymetrique(),
+						"Gagnant"     => TablierSolitaire::initTablierGagnant(),
+						"Perdant"     => TablierSolitaire::initTablierPerdant(),
+					);
+
+					$_SESSION['Tablier'] = $tab[$_GET['ChoixPlateau']];
 				}
+
+				$_SESSION['tablierActuel'] = $_GET['ChoixPlateau'];
 
 				break;
 			}
