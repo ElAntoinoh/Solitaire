@@ -136,7 +136,7 @@
 		 * @return bool Vrai si le mouvement est valide, faux sinon
 		 */
 		public function estValideMvtDir(int $numLigDepart, int $numColDepart, int $dir): bool {
-			$coordonnees = $this->coordonneesArrivee($numLigDepart, $numColDepart, $dir);
+			$coordonnees = $this->calculerCoordonneesArrivee($numLigDepart, $numColDepart, $dir);
 
 			return $this->estValideMvt($numLigDepart, $numColDepart, $coordonnees[0], $coordonnees[1]);
 		}
@@ -188,7 +188,7 @@
 		 * @param int $dir Direction du déplacement
 		 */
 		public function deplaceBilleDir(int $numLigDepart, int $numColDepart, int $dir): void {
-			$coordonnees = $this->coordonneesArrivee($numLigDepart, $numColDepart, $dir);
+			$coordonnees = $this->calculerCoordonneesArrivee($numLigDepart, $numColDepart, $dir);
 
 			$this->deplaceBille($numLigDepart, $numColDepart, $coordonnees[0], $coordonnees[1]);
 		}
@@ -200,7 +200,7 @@
 		 * @param int $dir Direction du déplacement
 		 * @return array Tableau contenant les coordonnées de la case d'arrivée ([0] = ligne, [1] = colonne)
 		 */
-		private function coordonneesArrivee(int $numLigDepart, int $numColDepart, int $dir): array {
+		private function calculerCoordonneesArrivee(int $numLigDepart, int $numColDepart, int $dir): array {
 			switch($dir) {
 				case TablierSolitaire::NORD: {
 					return array($numLigDepart - 2, $numColDepart);
@@ -381,10 +381,6 @@
 			));
 		}
 
-		public static function initTablierPersonalise(array $tab): TablierSolitaire {
-			return new TablierSolitaire($tab);
-		}
-
 		/**
 		 * Initialise un tablier perdant
 		 * @return TablierSolitaire Tablier initialisé
@@ -407,6 +403,15 @@
 				array(0, 0, 0),
 				array(0, 1, 1)
 			));
+		}
+
+		/**
+		 * Initialise un tablier personnalisé
+		 * @param array $tab Tableau de valeurs
+		 * @return TablierSolitaire Tablier initialisé
+		 */
+		public static function initTablierPersonalise(array $tab): TablierSolitaire {
+			return new TablierSolitaire($tab);
 		}
 	}
 ?>
