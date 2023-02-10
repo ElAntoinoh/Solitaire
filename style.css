@@ -14,3 +14,7 @@ table{
     height: 70px;
     width:  70px;
 }
+
+body, html {
+    height: 100%;
+}
